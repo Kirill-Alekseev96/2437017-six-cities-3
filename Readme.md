@@ -1,7 +1,7 @@
 # Личный проект «Шесть городов»
 
 * Студент: [Kirill Alexseev](https://up.htmlacademy.ru/react-individual/3/user/2437017).
-* Наставник: `Неизвестно`.
+* Наставник: [Станислав Михайлов](https://htmlacademy.ru/profile/id139638).
 
 ---
 
