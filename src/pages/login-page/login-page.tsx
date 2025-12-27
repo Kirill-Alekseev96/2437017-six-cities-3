@@ -1,8 +1,12 @@
 import HeaderBlock from '../../components/header-block.tsx';
+import { Helmet } from 'react-helmet-async';
 
-export default function LoginPage () {
+export default function LoginPage (): JSX.Element {
   return (
     <div className="page page--gray page--login">
+      <Helmet>
+        <title>6 cities: authorization</title>
+      </Helmet>
       <HeaderBlock showAuthInfo ={false}/>
 
       <main className="page__main page__main--login">

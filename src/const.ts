@@ -11,4 +11,17 @@ const SITIES = [
   'Dusseldorf',
 ];
 
-export{Setting, SITIES};
+enum AppRoute {
+  Main = '/',
+  Login = '/login',
+  Favorites = '/favorites',
+  Offer = '/offer/:id',
+}
+
+enum AuthorizationStatus {
+  Auth ='AUTH',
+  NoAuth ='NO_AUTH',
+  Unknown ='UNKNOWN',
+}
+
+export{Setting, SITIES, AppRoute, AuthorizationStatus};

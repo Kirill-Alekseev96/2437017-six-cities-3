@@ -1,4 +1,5 @@
 import {SITIES} from '../../../const.ts';
+import { NavLink } from 'react-router-dom';
 
 export default function TabsFragment (): JSX.Element {
   return (
@@ -7,9 +8,11 @@ export default function TabsFragment (): JSX.Element {
         <ul className="locations__list tabs__list">
           {SITIES.map((city) => (
             <li className="locations__item" key={city}>
-              <a className="locations__item-link tabs__item" href="#">
+              <NavLink to = '' className={({ isActive }) =>
+                `locations__item-link tabs__item${isActive ? ' tabs__item--active' : ''}`}
+              >
                 <span>{city}</span>
-              </a>
+              </NavLink>
             </li>
           ))}
         </ul>

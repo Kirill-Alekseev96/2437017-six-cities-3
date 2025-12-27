@@ -1,10 +1,14 @@
 import HeaderBlock from '../../components/header-block.tsx';
 import FooterBlock from '../../components/footer-block.tsx';
 // import CardBlock from '../../components/card-block/card-block.tsx';
+import { Helmet } from 'react-helmet-async';
 
 export default function FavoritesScreen () {
   return (
     <div className="page">
+      <Helmet>
+        <title>6 cities: favorites</title>
+      </Helmet>
       <HeaderBlock showAuthInfo/>
 
       <main className="page__main page__main--favorites">
