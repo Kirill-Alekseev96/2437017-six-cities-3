@@ -1,4 +1,4 @@
-import HeaderBlock from '../../components/header-block.tsx';
+// import HeaderBlock from '../../components/layout/header-block.tsx';
 import TabsFragment from './components/tabs-fragment.tsx';
 import SortingFragment from './components/sorting-fragment.tsx';
 import CardBlock from '../../components/card-block/card-block.tsx';
@@ -8,7 +8,7 @@ import { offers } from '../../mock/offers.ts';
 export default function MainPage () {
   return (
     <div className="page page--gray page--main">
-      <HeaderBlock showAuthInfo/>
+      {/* <HeaderBlock showAuthInfo/> */}
 
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>

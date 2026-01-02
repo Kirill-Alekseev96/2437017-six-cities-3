@@ -1,4 +1,4 @@
-import HeaderBlock from '../../components/header-block.tsx';
+// import HeaderBlock from '../../components/layout/header-block.tsx';
 import OfferGallery from './components/gallery-fragment.tsx';
 import { Helmet } from 'react-helmet-async';
 
@@ -8,7 +8,7 @@ export default function OfferPage (): JSX.Element {
       <Helmet>
         <title>6 cities: offer</title>
       </Helmet>
-      <HeaderBlock showAuthInfo/>
+      {/* <HeaderBlock showAuthInfo/> */}
       <main className="page__main page__main--offer">
         <section className="offer">
           <OfferGallery/>

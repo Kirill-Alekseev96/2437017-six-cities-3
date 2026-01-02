@@ -1,5 +1,5 @@
-import HeaderBlock from '../../../components/header-block.tsx';
-import FooterBlock from '../../../components/footer-block.tsx';
+import HeaderBlock from '../../../components/layout/header-block.tsx';
+import FooterBlock from '../../../components/layout/footer-block.tsx';
 
 export default function FavoritesScreen () {
   return (
