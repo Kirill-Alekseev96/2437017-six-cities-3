@@ -16,7 +16,7 @@ export interface Location {
 }
 
 export interface Offer {
-  id?: string;
+  id: string;
   title: string;
   type: string;
   price: number;

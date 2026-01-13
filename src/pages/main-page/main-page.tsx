@@ -9,12 +9,11 @@ interface MainPageProps {
   offers: Offer[];
 }
 
-export default function MainPage (props: MainPageProps) {
+export default function MainPage ({ offers }: MainPageProps) {
 
-  const { offers } = props;
-
-  const [activeCity, setactiveCity] = useState('Paris');
+  const [activeCity, setActiveCity] = useState('Paris');
   const filteredOffers = offers.filter((offer) => offer.city.name === activeCity);
+
   return (
     <div className="page page--gray page--main">
 
@@ -22,7 +21,7 @@ export default function MainPage (props: MainPageProps) {
         <h1 className="visually-hidden">Cities</h1>
         <TabsFragment
           activeCity = {activeCity}
-          setactiveCity = {setactiveCity}
+          setactiveCity = {setActiveCity}
         />
         <div className="cities">
           <div className="cities__places-container container">

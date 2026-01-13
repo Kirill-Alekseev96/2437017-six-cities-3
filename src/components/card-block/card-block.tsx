@@ -1,22 +1,40 @@
 import ButtonBookmark from './button-bookmark.tsx';
-import { Offer } from '../../mock/offers.ts';
+import { Offer } from '../../types-props.ts';
+import { Link } from 'react-router-dom';
 
 interface OfferCardProps {
   offer: Offer;
+  handleHover?: (offer:Offer | null) => void;
 }
 
-export default function CardBlock({ offer} :OfferCardProps) :JSX.Element {
-  const { title, type, price, previewImage, isPremium, rating } = offer;
+export default function CardBlock({ offer, handleHover, } :OfferCardProps) :JSX.Element {
+  const { id, title, type, price, previewImage, isPremium, rating } = offer;
+
+  function handleCardMouseEnter () {
+    if (handleHover) {
+      handleHover(offer);
+    }
+  }
+
+  function handleCardMouseLeave () {
+    if (handleHover) {
+      handleHover(null);
+    }
+  }
+
   return (
-    <article className="cities__card place-card">
+    <article className="cities__card place-card"
+      onMouseEnter = {handleCardMouseEnter}
+      onMouseLeave = {handleCardMouseLeave}
+    >
       {isPremium &&
       <div className="place-card__mark">
         <span>Premium</span>
       </div>}
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <a href="#">
+        <Link to ={`/offer/${id}`}>
           <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place image"/>
-        </a>
+        </Link>
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
