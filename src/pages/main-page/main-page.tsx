@@ -1,5 +1,5 @@
 import TabsFragment from './components/tabs-fragment.tsx';
-import MapBlock from '../../components/map-block.tsx';
+import MapBlock from '../../components/map-block/map-block.tsx';
 import ListOffers from './components/list-offers.tsx';
 import { Offer } from '../../types-props.ts';
 import { useState } from 'react';
