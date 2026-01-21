@@ -27,7 +27,6 @@ export default function CardBlock({ offer, handleHover, } :OfferCardProps) :JSX.
   function handleStatusButton (value:boolean) {
     setLocalOffer({...localOffer, isFavorite: value});
   }
-
   return (
     <article className="cities__card place-card"
       onMouseEnter = {handleCardMouseEnter}

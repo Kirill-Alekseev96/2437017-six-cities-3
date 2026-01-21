@@ -1,8 +1,10 @@
 import TabsFragment from './components/tabs-fragment.tsx';
 import MapBlock from '../../components/map-block/map-block.tsx';
 import ListOffers from './components/list-offers.tsx';
+import MainEmpty from './components/main-empty.tsx';
 import { Offer } from '../../types-props.ts';
 import { useState } from 'react';
+import CardHover from '../../components/card-block/card-hover.tsx';
 
 interface MainPageProps {
   offers: Offer[];
@@ -12,6 +14,8 @@ export default function MainPage ({ offers }: MainPageProps) {
 
   const [activeCity, setActiveCity] = useState('Paris');
   const filteredOffers = offers.filter((offer) => offer.city.name === activeCity);
+
+  const { activeOfferId, handleHover} = CardHover();
 
   return (
     <div className="page page--gray page--main">
@@ -24,11 +28,24 @@ export default function MainPage ({ offers }: MainPageProps) {
         />
         <div className="cities">
           <div className="cities__places-container container">
-            <ListOffers
-              filteredOffers = {filteredOffers}
-              activeCity = {activeCity}
-            />
-            <MapBlock/>
+            {
+              filteredOffers.length > 0 ? (
+                <>
+                  <ListOffers
+                    filteredOffers = {filteredOffers}
+                    activeCity = {activeCity}
+                    handleHover = {handleHover}
+                  />
+                  <div className="cities__right-section">
+                    <MapBlock
+                      key={activeCity}
+                      offers = { filteredOffers }
+                      activeOfferId = { activeOfferId }
+                    />
+                  </div>
+                </>) : (<MainEmpty/>
+              )
+            }
           </div>
         </div>
       </main>
