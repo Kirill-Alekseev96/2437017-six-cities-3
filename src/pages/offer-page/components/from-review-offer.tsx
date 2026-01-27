@@ -30,7 +30,7 @@ export default function ReviewForm () {
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
         {RATING_STARS.map(({value , title}) => (
-          <>
+          <>key={value}
             <input onChange={ fieldChangeHandle } className="form__rating-input visually-hidden" name="rating" value={value} id={`${value}"-stars"`} type="radio" checked={formData.rating === value}/>
             <label htmlFor={`${value}"-stars"`} className="reviews__rating-label form__rating-label" title={title}>
               <svg className="form__star-image" width="37" height="33">

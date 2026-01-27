@@ -2,12 +2,13 @@ import OfferGallery from './components/gallery-fragment.tsx';
 import OfferWrapper from './components/offer__wrapper.tsx';
 import CardBlock from '../../components/card-block/card-block.tsx';
 import MapBlock from '../../components/map-block/map-block.tsx';
+
 import { Helmet } from 'react-helmet-async';
-import { Offer } from '../../types-props.ts';
-import { AuthorizationStatus } from '../../const.ts';
-// import { useState } from 'react';
-import CardHover from '../../components/card-block/card-hover.tsx';
 import { useParams } from 'react-router-dom';
+
+import { Offer } from '../../types-props.ts';
+
+import { AuthorizationStatus } from '../../const.ts';
 
 interface OfferPageProps {
   offers: Offer[];
@@ -27,7 +28,6 @@ function getSelectedOffer (offers: Offer[], currentOffer?: Offer) {
 
 export default function OfferPage ({ offers, authorizationStatus } : OfferPageProps): JSX.Element {
 
-  const { handleHover } = CardHover();
   const { id } = useParams<{ id: string }>(); // получаем текущее id стр.
 
   const currentOffer = offers.find((offer) => offer.id === id) as Offer; // находит по id конкретный offer
@@ -49,7 +49,6 @@ export default function OfferPage ({ offers, authorizationStatus } : OfferPagePr
             currentOffer = {currentOffer}
             authorizationStatus = {authorizationStatus}
           />
-          {/* <section className="offer__map map"></section> */}
           <MapBlock
             offers = { mapOffers }
             activeOfferId = { currentOffer.id }
@@ -64,7 +63,6 @@ export default function OfferPage ({ offers, authorizationStatus } : OfferPagePr
                 <CardBlock
                   key = {offer.id}
                   offer={offer}
-                  handleHover = {handleHover}
                 />
               ))}
             </div>
