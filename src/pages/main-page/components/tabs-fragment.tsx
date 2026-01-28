@@ -5,9 +5,7 @@ interface TabsFragmentProps {
   setActiveCity: (city: string) => void;
 }
 
-export default function TabsFragment (props:TabsFragmentProps): JSX.Element {
-
-  const {activeCity, setActiveCity} = props;
+export default function TabsFragment ({activeCity, setActiveCity} :TabsFragmentProps): JSX.Element {
 
   function getActiveClass (city: string): string {
     return city === activeCity ? 'tabs__item--active' : '';
