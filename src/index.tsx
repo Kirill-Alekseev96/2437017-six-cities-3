@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
-import { store } from './store/imdex.ts';
+import { store } from './store/index.ts';
 import App from './components/app/app.tsx';
 import { offers } from './mock/offers.ts';
 import { AuthorizationStatus } from './const.ts';

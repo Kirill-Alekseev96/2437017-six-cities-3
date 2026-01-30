@@ -24,12 +24,12 @@ export default function App(props: AppProps) {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Layout/>}>
-            <Route index element = { <MainPage offers = {offers}/> }/>
+            <Route index element = { < MainPage /> }/>
             <Route path = { AppRoute.Offer } element = { <OfferPage offers = {offers} authorizationStatus = {authorizationStatus}/> }/>
             <Route path = { AppRoute.Login } element = { <LoginPage/> } />
             <Route path = { AppRoute.Favorites } element = {
               <PrivateRoute authorizationStatus = { authorizationStatus }>
-                <FavoritesPage offers = {offers}/>
+                <FavoritesPage/>
               </PrivateRoute>
             }
             />

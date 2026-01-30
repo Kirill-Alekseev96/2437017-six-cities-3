@@ -1,12 +1,13 @@
 interface ButtonBookmarkProps {
-handleStatusButton: (isFavorite:boolean) => void;
+handleStatusButton: (id:string) => void;
+id: string;
 isFavorite?: boolean;
 }
 
-export default function ButtonBookmark ({handleStatusButton, isFavorite = false}:ButtonBookmarkProps) {
+export default function ButtonBookmark ({handleStatusButton, id, isFavorite}:ButtonBookmarkProps) {
   return (
     <button
-      onClick = {() => handleStatusButton(!isFavorite)}
+      onClick = {() => handleStatusButton(id)}
       className={`place-card__bookmark-button button
         ${isFavorite ? 'place-card__bookmark-button--active' : ''}`}
       type="button"
