@@ -2,6 +2,7 @@ import { Offer } from '../../../types-props.ts';
 import ReviewForm from './from-review-offer.tsx';
 import ListReview from './list-review.tsx';
 import { AuthorizationStatus } from '../../../const.ts';
+import ButtonBookmark from '../../../components/card-block/button-bookmark.tsx';
 
 interface OfferWrapperProps {
   currentOffer: Offer;
@@ -10,7 +11,7 @@ interface OfferWrapperProps {
 
 export default function OfferWrapper ({currentOffer, authorizationStatus}: OfferWrapperProps): JSX.Element {
 
-  const { title, type, price, isPremium, rating} = currentOffer;
+  const { id, title, type, price, isFavorite, isPremium, rating} = currentOffer;
 
   return (
     <div className="offer__container container">
@@ -23,12 +24,17 @@ export default function OfferWrapper ({currentOffer, authorizationStatus}: Offer
           <h1 className="offer__name">
             {title}
           </h1>
-          <button className="offer__bookmark-button button" type="button">
+          {/* <button className="offer__bookmark-button button" type="button">
             <svg className="offer__bookmark-icon" width="31" height="33">
               <use xlinkHref="#icon-bookmark"></use>
             </svg>
             <span className="visually-hidden">To bookmarks</span>
-          </button>
+          </button> */}
+          <ButtonBookmark
+            id = {id}
+            isFavorite = {isFavorite}
+            variant = 'offer'
+          />
         </div>
         <div className="offer__rating rating">
           <div className="offer__stars rating__stars">

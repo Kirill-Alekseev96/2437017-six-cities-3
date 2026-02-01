@@ -1,16 +1,19 @@
 import ButtonBookmark from './button-bookmark.tsx';
 import { Offer } from '../../types-props.ts';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+
+// import { toggelFavorite } from '../../store/action.ts';
+// import { useAppDispatch } from '../../hooks/useStore.ts';
 interface OfferCardProps {
   offer: Offer;
   handleHover?: (offer:Offer | null) => void;
 }
 
 export default function CardBlock({ offer, handleHover, } :OfferCardProps) :JSX.Element {
-  const [localOffer, setLocalOffer] = useState<Offer>(offer);
 
-  const { id, title, type, price, previewImage, isPremium, isFavorite, rating } = localOffer;
+  const { id, title, type, price, previewImage, isPremium, isFavorite, rating } = offer;
+
+  // const dispatch = useAppDispatch();
 
   function handleCardMouseEnter () {
     if (handleHover) {
@@ -24,9 +27,10 @@ export default function CardBlock({ offer, handleHover, } :OfferCardProps) :JSX.
     }
   }
 
-  function handleStatusButton (value:boolean) {
-    setLocalOffer({...localOffer, isFavorite: value});
-  }
+  // function handleStatusButton (value:string) {
+  //   dispatch(toggelFavorite(value));
+  // }
+
   return (
     <article className="cities__card place-card"
       onMouseEnter = {handleCardMouseEnter}
@@ -48,17 +52,14 @@ export default function CardBlock({ offer, handleHover, } :OfferCardProps) :JSX.
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
           <ButtonBookmark
-            handleStatusButton = {handleStatusButton}
+            id = {id}
             isFavorite = {isFavorite}
+            variant = 'card'
           />
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{
-              width: '80%',
-            }}
-            >
-            </span>
+            <span style={{width: '80%',}}></span>
             <span className="visually-hidden">{rating}</span>
           </div>
         </div>

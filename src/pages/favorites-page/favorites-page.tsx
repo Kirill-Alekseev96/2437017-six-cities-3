@@ -4,14 +4,11 @@ import FavoritesBlock from './components/favorites-empty.tsx';
 import { CITIES } from '../../const.ts';
 
 import { Helmet } from 'react-helmet-async';
+import { useAppSelector } from '../../hooks/useStore.ts';
 
-import { Offer } from '../../types-props.ts';
+export default function FavoritesScreen () {
 
-interface FavoritesScreenProps {
-  offers: Offer[];
-}
-
-export default function FavoritesScreen ({offers}: FavoritesScreenProps) {
+  const offers = useAppSelector((state) => state.offers);
 
   const favoriteOffers = offers.filter((offer) => offer.isFavorite);
 

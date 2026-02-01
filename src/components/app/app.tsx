@@ -10,26 +10,23 @@ import NotFoundPage from '../../pages/not-found-page/not-found-page.tsx';
 import Layout from '../layout/layout.tsx';
 import PrivateRoute from '../private-route/private-route.tsx';
 import { AppRoute, AuthorizationStatus } from '../../const.ts';
-import { Offer } from '../../types-props.ts';
-
 interface AppProps {
-  offers: Offer[];
   authorizationStatus: AuthorizationStatus;
 }
 
 export default function App(props: AppProps) {
-  const {offers, authorizationStatus} = props;
+  const { authorizationStatus} = props;
   return (
     <HelmetProvider>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Layout/>}>
-            <Route index element = { <MainPage offers = {offers}/> }/>
-            <Route path = { AppRoute.Offer } element = { <OfferPage offers = {offers} authorizationStatus = {authorizationStatus}/> }/>
+            <Route index element = { < MainPage /> }/>
+            <Route path = { AppRoute.Offer } element = { <OfferPage authorizationStatus = {authorizationStatus}/> }/>
             <Route path = { AppRoute.Login } element = { <LoginPage/> } />
             <Route path = { AppRoute.Favorites } element = {
               <PrivateRoute authorizationStatus = { authorizationStatus }>
-                <FavoritesPage offers = {offers}/>
+                <FavoritesPage/>
               </PrivateRoute>
             }
             />

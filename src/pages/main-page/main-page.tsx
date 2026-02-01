@@ -6,17 +6,17 @@ import MainEmpty from './components/main-empty.tsx';
 import { Offer } from '../../types-props.ts';
 
 import { useState } from 'react';
+import { useAppSelector } from '../../hooks/useStore.ts';
 
-interface MainPageProps {
-  offers: Offer[];
-}
+export default function MainPage (): JSX.Element {
 
-export default function MainPage ({ offers }: MainPageProps) {
+  const offers = useAppSelector((state) => state.offers);
 
   const [activeCity, setActiveCity] = useState('Paris');
-  const filteredOffers = offers.filter((offer) => offer.city.name === activeCity);
 
   const [activeOfferId, setActiveOfferId] = useState<string | null>(null);
+
+  const filteredOffers = offers.filter((offer) => offer.city.name === activeCity);
 
   function handleHover (offer :Offer | null) {
     if (offer) {

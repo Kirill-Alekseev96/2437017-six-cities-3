@@ -5,13 +5,13 @@ import MapBlock from '../../components/map-block/map-block.tsx';
 
 import { Helmet } from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
+import { useAppSelector } from '../../hooks/useStore.ts';
 
 import { Offer } from '../../types-props.ts';
 
 import { AuthorizationStatus } from '../../const.ts';
 
 interface OfferPageProps {
-  offers: Offer[];
   authorizationStatus: AuthorizationStatus;
 }
 
@@ -26,7 +26,9 @@ function getSelectedOffer (offers: Offer[], currentOffer?: Offer) {
   )).slice(0, 3);
 }
 
-export default function OfferPage ({ offers, authorizationStatus } : OfferPageProps): JSX.Element {
+export default function OfferPage ({ authorizationStatus } : OfferPageProps): JSX.Element {
+
+  const offers = useAppSelector((state) => state.offers);
 
   const { id } = useParams<{ id: string }>(); // получаем текущее id стр.
 
