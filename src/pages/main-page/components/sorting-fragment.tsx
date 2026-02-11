@@ -12,14 +12,14 @@ export default function SortingFragment ({handleSortingChange, activePlace}:Sort
   function getActiveClass (sort: string): string {
     return sort === activePlace ? 'places__option--active' : '';
   }
-  
-function fn (event: MouseEvent<HTMLUListElement>) {
-  const element = event.target as HTMLLIElement;
-  const textSorting: string | null = element.textContent;
-  if (textSorting) {
-    handleSortingChange(textSorting);
+
+  function fn (event: MouseEvent<HTMLUListElement>) {
+    const element = event.target as HTMLLIElement;
+    const textSorting: string | null = element.textContent;
+    if (textSorting) {
+      handleSortingChange(textSorting);
+    }
   }
-}
 
   return (
     <form className="places__sorting" action="#" method="get">
