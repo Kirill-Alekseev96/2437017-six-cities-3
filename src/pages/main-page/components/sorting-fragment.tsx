@@ -1,6 +1,6 @@
 import { MouseEvent } from 'react';
 
-import { SORTINGS } from '../../../const';
+import { SORTING } from '../../../const';
 
 interface SortingFragmentProps {
   handleSortingChange: (sorting: string) => void;
@@ -13,8 +13,8 @@ export default function SortingFragment ({handleSortingChange, activePlace}:Sort
     return sort === activePlace ? 'places__option--active' : '';
   }
 
-  function fn (evnt :MouseEvent<HTMLUListElement>) {
-    const element = evnt.target as HTMLLIElement;
+  function fn (event :MouseEvent<HTMLUListElement>) {
+    const element = event.target as HTMLLIElement;
     const textSorting:string = element.textContent;
     if (textSorting) {
       handleSortingChange(textSorting);
@@ -31,7 +31,7 @@ export default function SortingFragment ({handleSortingChange, activePlace}:Sort
         </svg>
       </span>
       <ul onClick={(fn)} className="places__options places__options--custom places__options--opened">
-        {SORTINGS.map((sort) => (
+        {SORTING.map((sort) => (
           <li key={sort}
             className={`places__option ${getActiveClass(sort)}`}
             tabIndex={0}

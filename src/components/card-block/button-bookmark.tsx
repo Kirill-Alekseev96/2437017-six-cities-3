@@ -1,4 +1,4 @@
-import { toggelFavorite } from '../../store/action.ts';
+import { toggleFavorite } from '../../store/action.ts';
 import { useAppDispatch } from '../../hooks/useStore.ts';
 import { STYLES } from './const.ts';
 
@@ -15,7 +15,7 @@ export default function ButtonBookmark ({ id, isFavorite, variant}:ButtonBookmar
   const dispatch = useAppDispatch();
 
   function handleStatusButton (value:string) {
-    dispatch(toggelFavorite(value));
+    dispatch(toggleFavorite(value));
   }
 
   return (

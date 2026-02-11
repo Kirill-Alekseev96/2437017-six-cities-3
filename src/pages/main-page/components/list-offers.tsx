@@ -1,7 +1,7 @@
 import SortingFragment from './sorting-fragment.tsx';
 import CardBlock from '../../../components/card-block/card-block.tsx';
 import { Offer } from '../../../types-props.ts';
-import { SORTINGS } from '../../../const.ts';
+import { SORTING } from '../../../const.ts';
 
 import { useState, useEffect } from 'react';
 
@@ -28,15 +28,15 @@ export default function ListOffers ({filteredOffers, activeCity, handleHover} :L
     const newOffers = [...filteredOffers];
 
     switch (activePlace) {
-      case SORTINGS[0]:
+      case SORTING[0]:
         newOffers.sort((a: Offer, b: Offer) => a.price - b.price);
         setSortingCard(newOffers);
         break;
-      case SORTINGS[1]:
+      case SORTING[1]:
         newOffers.sort((a: Offer, b: Offer) => b.price - a.price);
         setSortingCard(newOffers);
         break;
-      case SORTINGS[2]:
+      case SORTING[2]:
         newOffers.sort((a: Offer, b: Offer) => b.rating - a.rating);
         setSortingCard(newOffers);
         break;

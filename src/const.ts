@@ -19,7 +19,7 @@ const RATING_STARS = [
   { value: 1, title: 'terribly' }
 ] as const;
 
-const SORTINGS = [
+const SORTING = [
   'Popular',
   'Price: low to high',
   'Price: high to low',
@@ -33,10 +33,25 @@ enum AppRoute {
   Offer = '/offer/:id',
 }
 
+const APIRoute = {
+  Comments: '/comments',
+  Login: '/login',
+  Favorites: '/favorites',
+  Logout: '/logout',
+  Offers: '/offers',
+};
+
 enum AuthorizationStatus {
   Auth ='AUTH',
   NoAuth ='NO_AUTH',
   Unknown ='UNKNOWN',
 }
 
-export{Setting, CITIES, RATING_STARS, AppRoute, AuthorizationStatus, SORTINGS};
+enum RequestStatus {
+  Idle,
+  Loading,
+  Success,
+  Failed,
+}
+
+export{Setting, CITIES, RATING_STARS, AppRoute, AuthorizationStatus, SORTING, APIRoute, RequestStatus};

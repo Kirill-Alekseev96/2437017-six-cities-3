@@ -2,15 +2,26 @@ import TabsFragment from './components/tabs-fragment.tsx';
 import MapBlock from '../../components/map-block/map-block.tsx';
 import ListOffers from './components/list-offers.tsx';
 import MainEmpty from './components/main-empty.tsx';
+import Spinner from '../../components/spinner/spinner.tsx';
 
 import { Offer } from '../../types-props.ts';
+import { fetchAllOffers } from '../../store/async-actions/offers-action.ts';
+import { RequestStatus } from '../../const.ts';
 
-import { useState } from 'react';
-import { useAppSelector } from '../../hooks/useStore.ts';
+import { useState, useEffect } from 'react';
+import { useAppSelector, useAppDispatch } from '../../hooks/useStore.ts';
 
 export default function MainPage (): JSX.Element {
 
+  const dispatch = useAppDispatch();
+
+  // Загружаем данные при монтировании компонента(открытие стр)
+  useEffect(() => {
+    dispatch(fetchAllOffers());
+  }, [dispatch]);
+
   const offers = useAppSelector((state) => state.offers);
+  const status = useAppSelector((state) => state.status);
 
   const [activeCity, setActiveCity] = useState('Paris');
 
@@ -26,6 +37,33 @@ export default function MainPage (): JSX.Element {
     }
   }
 
+  const renderContent = () => {
+    if (status === RequestStatus.Loading) {
+      return <Spinner/>;
+    }
+
+    if (filteredOffers.length === 0) {
+      return <MainEmpty />;
+    }
+
+    return (
+      <>
+        <ListOffers
+          filteredOffers = {filteredOffers}
+          activeCity = {activeCity}
+          handleHover = {handleHover}
+        />
+        <div className="cities__right-section">
+          <MapBlock
+            key={activeCity}
+            offers = { filteredOffers }
+            activeOfferId = { activeOfferId }
+          />
+        </div>
+      </>
+    );
+  };
+
   return (
     <div className="page page--gray page--main">
 
@@ -37,24 +75,7 @@ export default function MainPage (): JSX.Element {
         />
         <div className="cities">
           <div className="cities__places-container container">
-            {
-              filteredOffers.length > 0 ? (
-                <>
-                  <ListOffers
-                    filteredOffers = {filteredOffers}
-                    activeCity = {activeCity}
-                    handleHover = {handleHover}
-                  />
-                  <div className="cities__right-section">
-                    <MapBlock
-                      key={activeCity}
-                      offers = { filteredOffers }
-                      activeOfferId = { activeOfferId }
-                    />
-                  </div>
-                </>) : (<MainEmpty/>
-              )
-            }
+            {renderContent()}
           </div>
         </div>
       </main>
