@@ -23,7 +23,7 @@ export default function App() {
     dispatch(checkAuthAction());
   }, [dispatch]);
 
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const authorizationStatus = useAppSelector((state) => state.authStatus);
 
   return (
     <HelmetProvider>
@@ -31,7 +31,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Layout/>}>
             <Route index element = { < MainPage /> }/>
-            <Route path = { AppRoute.Offer } element = { <OfferPage authorizationStatus = {authorizationStatus}/> }/>
+            <Route path = { AppRoute.Offer } element = { <OfferPage/> }/>
             <Route path = { AppRoute.Login } element = { <LoginPage/> } />
             <Route path = { AppRoute.Favorites } element = {
               <PrivateRoute authorizationStatus = { authorizationStatus }>

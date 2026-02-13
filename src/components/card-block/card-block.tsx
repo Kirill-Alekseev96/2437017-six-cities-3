@@ -52,7 +52,7 @@ export default function CardBlock({ offer, handleHover, } :OfferCardProps) :JSX.
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style= {{width: `${Math.round(rating) * 10}%`}}></span>
+            <span style= {{width: `${Math.round(rating) * 20}%`}}></span>
             <span className="visually-hidden">{rating}</span>
           </div>
         </div>

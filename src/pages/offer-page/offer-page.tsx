@@ -1,4 +1,3 @@
-import OfferGallery from './components/gallery-fragment.tsx';
 import OfferWrapper from './components/offer__wrapper.tsx';
 import CardBlock from '../../components/card-block/card-block.tsx';
 import MapBlock from '../../components/map-block/map-block.tsx';
@@ -12,13 +11,8 @@ import { fetchOfferById } from '../../store/async-actions/offer-action.ts';
 
 import { Offer } from '../../types/offer-data.ts';
 
-import { AuthorizationStatus } from '../../const.ts';
 
-interface OfferPageProps {
-  authorizationStatus: AuthorizationStatus;
-}
-
-function getSelectedOffer (offers: Offer[], currentOffer?: Offer) {
+function getSelectedOffer (offers: Offer[], currentOffer: Offer | null) {
   if(!currentOffer) {
     return [];
   }
@@ -29,23 +23,21 @@ function getSelectedOffer (offers: Offer[], currentOffer?: Offer) {
   )).slice(0, 3);
 }
 
-export default function OfferPage ({ authorizationStatus } : OfferPageProps): JSX.Element {
+export default function OfferPage (): JSX.Element {
 
-  const { id } = useParams<{ id: string }>(); // получаем текущее id стр.
-
-  // const currentOffer = offers.find((offer) => offer.id === id) as Offer; // находит по id конкретный offer
+  const offers = useAppSelector((state) => state.offers);
+  const currentOffer = useAppSelector((state) => state.offer);
+  const authorizationStatus = useAppSelector((state) => state.authStatus);
 
   const dispatch = useAppDispatch();
+
+  const { id } = useParams<{ id: string }>(); // получаем текущее id стр.
 
   useEffect(() => {
     if (id) {
       dispatch(fetchOfferById(id));
     }
-  }, [dispatch]);
-
-  const offers = useAppSelector((state) => state.offer);
-
-  const currentOffer = useAppSelector((state) => state.offer);
+  }, [dispatch, id]);
 
   const nearbyOffers = getSelectedOffer(offers, currentOffer); // находим ближайшие предложения, разные id, одно name
 
@@ -59,16 +51,17 @@ export default function OfferPage ({ authorizationStatus } : OfferPageProps): JS
       </Helmet>
       <main className="page__main page__main--offer">
         <section className="offer">
-          <OfferGallery/>
           <OfferWrapper
             currentOffer = {currentOffer}
             authorizationStatus = {authorizationStatus}
           />
-          <MapBlock
-            offers = { mapOffers }
-            activeOfferId = { currentOffer.id }
-            className="offer__map map"
-          />
+          {currentOffer && (
+            <MapBlock
+              offers={mapOffers}
+              activeOfferId={currentOffer.id}
+              className="offer__map map"
+            />
+          )}
         </section>
         <div className="container">
           <section className="near-places places">
