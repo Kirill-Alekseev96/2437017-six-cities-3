@@ -27,7 +27,7 @@ export default function FavoritesScreen () {
           <section className="favorites">
             <h1 className="favorites__title">Saved listing</h1>
             <ul className="favorites__list">
-              {CITIES.map((city) => {
+              {CITIES.map(({city}) => {
                 //есть ли избранные в этом городе
                 const hasCityOffers = favoriteOffers.some((offer) => offer.city.name === city);
 

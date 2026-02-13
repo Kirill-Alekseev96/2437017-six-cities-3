@@ -15,6 +15,12 @@ export interface Location {
   zoom: number;
 }
 
+export interface Host {
+  name: string;
+  avatarUrl: string;
+  isPro: boolean;
+}
+
 export interface Offer {
   id: string;
   title: string;
@@ -26,4 +32,10 @@ export interface Offer {
   isFavorite?: boolean;
   isPremium: boolean;
   rating: number;
+  description: string;
+  bedrooms: number;
+  goods: [string];
+  host: Host;
+  images: [string];
+  maxAdults: number;
 }

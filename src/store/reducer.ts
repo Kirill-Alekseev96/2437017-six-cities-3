@@ -3,7 +3,7 @@ import { createReducer } from '@reduxjs/toolkit';
 import { fetchAllOffers } from './async-actions/offers-action';
 import { toggleFavorite, requireAuthorization } from './action';
 
-import { Offer } from '../types/types-props';
+import { Offer } from '../types/offer-data';
 import { RequestStatus, AuthorizationStatus } from '../const';
 
 type OffersState = {
@@ -18,7 +18,7 @@ const initialState:OffersState = {
   authorizationStatus: AuthorizationStatus.Unknown,
 };
 
-export const reducer = createReducer(initialState, (builder) => {
+export const offersReducer = createReducer(initialState, (builder) => {
   builder
 
     .addCase(fetchAllOffers.pending, (state) => {

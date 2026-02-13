@@ -3,13 +3,15 @@ const Setting = {
 };
 
 const CITIES = [
-  'Paris',
-  'Cologne',
-  'Brussels',
-  'Amsterdam',
-  'Hamburg',
-  'Dusseldorf',
-];
+  { city: 'Paris', lat: 48.8566, lon: 2.3522 },
+  { city: 'Cologne', lat: 50.9385, lon: 6.9591 },
+  { city: 'Brussels', lat: 50.85045, lon: 4.34878 },
+  { city: 'Amsterdam', lat: 52.378156, lon: 4.899821 },
+  { city: 'Hamburg', lat: 53.5584, lon: 10.0003 },
+  { city: 'Dusseldorf', lat: 51.2277, lon: 6.7735 }
+]as const;
+
+const ZOOM = 13;
 
 const RATING_STARS = [
   { value: 5, title: 'perfect' },
@@ -19,12 +21,18 @@ const RATING_STARS = [
   { value: 1, title: 'terribly' }
 ] as const;
 
-const SORTING = [
+const SORT_OPTIONS = [
   'Popular',
   'Price: low to high',
   'Price: high to low',
   'Top rated first',
 ];
+
+const SORT_TYPES = {
+  lowHigh: 'Price: low to high',
+  highLow: 'Price: high to low',
+  top: 'Top rated first',
+};
 
 enum AppRoute {
   Main = '/',
@@ -54,4 +62,4 @@ enum RequestStatus {
   Failed,
 }
 
-export{Setting, CITIES, RATING_STARS, AppRoute, AuthorizationStatus, SORTING, APIRoute, RequestStatus};
+export{Setting, CITIES, ZOOM, RATING_STARS, AppRoute, AuthorizationStatus, SORT_OPTIONS, SORT_TYPES, APIRoute, RequestStatus};

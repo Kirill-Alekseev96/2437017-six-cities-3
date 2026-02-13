@@ -1,5 +1,5 @@
 import ButtonBookmark from './button-bookmark.tsx';
-import { Offer } from '../../types/types-props.ts';
+import { Offer } from '../../types/offer-data.ts';
 
 import { Link } from 'react-router-dom';
 

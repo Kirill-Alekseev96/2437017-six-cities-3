@@ -1,12 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { reducer } from './reducer';
+import { rootReducer } from './root-reducer';
 import { createAPI } from '../services/api';
 
 
 const api = createAPI();
 //Хранилище, храниться в памяти, на клиенте.
 export const store = configureStore({
-  reducer,
+  reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       thunk: {

@@ -4,7 +4,7 @@ import ListOffers from './components/list-offers.tsx';
 import MainEmpty from './components/main-empty.tsx';
 import Spinner from '../../components/spinner/spinner.tsx';
 
-import { Offer } from '../../types/types-props.ts';
+import { Offer } from '../../types/offer-data.ts';
 import { fetchAllOffers } from '../../store/async-actions/offers-action.ts';
 import { RequestStatus } from '../../const.ts';
 

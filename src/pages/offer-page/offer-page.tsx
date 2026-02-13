@@ -5,9 +5,12 @@ import MapBlock from '../../components/map-block/map-block.tsx';
 
 import { Helmet } from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
-import { useAppSelector } from '../../hooks/useStore.ts';
+import { useEffect } from 'react';
+import { useAppSelector, useAppDispatch } from '../../hooks/useStore.ts';
 
-import { Offer } from '../../types/types-props.ts';
+import { fetchOfferById } from '../../store/async-actions/offer-action.ts';
+
+import { Offer } from '../../types/offer-data.ts';
 
 import { AuthorizationStatus } from '../../const.ts';
 
@@ -28,11 +31,21 @@ function getSelectedOffer (offers: Offer[], currentOffer?: Offer) {
 
 export default function OfferPage ({ authorizationStatus } : OfferPageProps): JSX.Element {
 
-  const offers = useAppSelector((state) => state.offers);
-
   const { id } = useParams<{ id: string }>(); // получаем текущее id стр.
 
-  const currentOffer = offers.find((offer) => offer.id === id) as Offer; // находит по id конкретный offer
+  // const currentOffer = offers.find((offer) => offer.id === id) as Offer; // находит по id конкретный offer
+
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (id) {
+      dispatch(fetchOfferById(id));
+    }
+  }, [dispatch]);
+
+  const offers = useAppSelector((state) => state.offer);
+
+  const currentOffer = useAppSelector((state) => state.offer);
 
   const nearbyOffers = getSelectedOffer(offers, currentOffer); // находим ближайшие предложения, разные id, одно name
 

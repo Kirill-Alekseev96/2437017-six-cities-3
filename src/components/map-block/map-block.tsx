@@ -3,7 +3,7 @@ import 'leaflet/dist/leaflet.css';
 import { defaultMarkerIcon, activeMarkerIcon } from './const.ts';
 import { useEffect } from 'react';
 import { useRef } from 'react';
-import { Offer } from '../../types/types-props.ts';
+import { Offer } from '../../types/offer-data.ts';
 import useMap from './use-map.ts';
 
 interface MapBlockProps {

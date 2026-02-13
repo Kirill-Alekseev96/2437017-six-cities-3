@@ -1,4 +1,4 @@
-import { Offer } from '../../../types/types-props.ts';
+import { Offer } from '../../../types/offer-data.ts';
 import ReviewForm from './from-review-offer.tsx';
 import ListReview from './list-review.tsx';
 import { AuthorizationStatus } from '../../../const.ts';
