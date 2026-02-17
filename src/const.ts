@@ -44,7 +44,7 @@ enum AppRoute {
 const APIRoute = {
   Comments: '/comments',
   Login: '/login',
-  Favorites: '/favorites',
+  Favorite: '/favorite',
   Logout: '/logout',
   Offers: '/offers',
 };

@@ -3,9 +3,9 @@ import { createReducer } from '@reduxjs/toolkit';
 import { fetchAllOffers } from './async-actions/offers-action';
 import { fetchOfferById } from './async-actions/offer-action';
 
-import { toggleFavorite } from './action';
+import { fetchFavoritesAction, favoriteAction } from './async-actions/favorite-action';
 import { requireAuthorization } from './action';
-import { loginAction } from './async-actions/login-action';
+import { loginAction, logoutAction } from './async-actions/login-action';
 
 import { Offer } from '../types/offer-data';
 import { RequestStatus, AuthorizationStatus } from '../const';
@@ -18,7 +18,7 @@ type OffersState = {
   status: RequestStatus;
   authStatus: AuthorizationStatus;
   userData: UserData | null;
-
+  favorites: Offer[];
 }
 
 const initialState:OffersState = {
@@ -27,6 +27,7 @@ const initialState:OffersState = {
   status: RequestStatus.Idle,
   authStatus: AuthorizationStatus.Unknown,
   userData: null,
+  favorites: [],
 };
 
 export const reducer = createReducer(initialState, (builder) => {
@@ -63,7 +64,18 @@ export const reducer = createReducer(initialState, (builder) => {
       state.userData = action.payload;
       state.authStatus = AuthorizationStatus.Auth;
     })
+
     .addCase(loginAction.rejected, (state) => {
+      state.userData = null;
+      state.authStatus = AuthorizationStatus.NoAuth;
+    })
+
+    .addCase(logoutAction.fulfilled, (state) => {
+      state.userData = null;
+      state.authStatus = AuthorizationStatus.NoAuth;
+    })
+
+    .addCase(logoutAction.rejected, (state) => {
       state.userData = null;
       state.authStatus = AuthorizationStatus.NoAuth;
     })
@@ -72,11 +84,21 @@ export const reducer = createReducer(initialState, (builder) => {
       state.authStatus = action.payload;
     })
 
-    .addCase(toggleFavorite, (state, action) => {
-      const offer = state.offers.find((o) => o.id === action.payload);
-      if (offer) {
-        // Инвертируем isFavorite
-        offer.isFavorite = !offer.isFavorite;
+    .addCase(fetchFavoritesAction.fulfilled, (state, action) => {
+      state.favorites = action.payload;
+    })
+
+
+    /*Изменение статуса (добавить/удалить)*/
+    .addCase(favoriteAction.fulfilled, (state, action) => {
+      const updatedOffer = action.payload;
+
+      state.offers = state.offers.map((offer) =>
+        offer.id === updatedOffer.id ? updatedOffer : offer
+      );
+
+      if (state.offer?.id === updatedOffer.id) {
+        state.offer = updatedOffer;
       }
     });
 });

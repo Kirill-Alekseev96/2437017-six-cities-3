@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
-import { useAppSelector } from '../../hooks/useStore';
-import { AppRoute, APIRoute, AuthorizationStatus } from '../../const';
+import { useAppDispatch, useAppSelector } from '../../hooks/useStore';
+import { AppRoute, AuthorizationStatus } from '../../const';
+import { logoutAction } from '../../store/async-actions/login-action';
 
 interface HeaderProps {
   showAuthInfo: boolean;
@@ -8,10 +9,16 @@ interface HeaderProps {
 
 export default function HeaderBlock ({showAuthInfo} :HeaderProps): JSX.Element {
 
-  const isAuthorized = useAppSelector((state) => state.authStatus);
-  const authStatus = isAuthorized === AuthorizationStatus.Auth;
+  const favorites = useAppSelector((state) => state.favorites);
+  const authStatus = useAppSelector((state) => state.authStatus);
+  const isAuthorized = authStatus === AuthorizationStatus.Auth;
 
-  const dataUser = useAppSelector((state) => state.userData);
+  const userData = useAppSelector((state) => state.userData);
+  const dispatch = useAppDispatch();
+
+  function handleLogout () {
+    dispatch(logoutAction());
+  }
 
   return (
     <header className="header">
@@ -25,17 +32,17 @@ export default function HeaderBlock ({showAuthInfo} :HeaderProps): JSX.Element {
           {showAuthInfo && (
             <nav className="header__nav">
               <ul className="header__nav-list">
-                {authStatus ? (
+                {isAuthorized ? (
                   <>
                     <li className="header__nav-item user">
                       <Link className="header__nav-link header__nav-link--profile" to={AppRoute.Favorites}>
-                        <div className="header__avatar-wrapper user__avatar-wrapper"></div>
-                        <span className="header__user-name user__name">{`${dataUser?.avatarUrl} ${dataUser?.name}`}</span>
-                        <span className="header__favorite-count">3</span>
+                        <div className="header__avatar-wrapper user__avatar-wrapper" style={{ backgroundImage: `url(${userData?.avatarUrl})`}}></div>
+                        <span className="header__user-name user__name">{userData?.email}</span>
+                        <span className="header__favorite-count">{favorites.length}</span>
                       </Link>
                     </li>
                     <li className="header__nav-item">
-                      <Link className="header__nav-link" to={APIRoute.Logout}>
+                      <Link to = '/' className="header__nav-link" onClick={handleLogout}>
                         <span className="header__signout">Sign out</span>
                       </Link>
                     </li>

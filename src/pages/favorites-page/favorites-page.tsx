@@ -5,14 +5,13 @@ import { CITIES } from '../../const.ts';
 
 import { Helmet } from 'react-helmet-async';
 import { useAppSelector } from '../../hooks/useStore.ts';
+import { Link } from 'react-router-dom';
 
 export default function FavoritesScreen () {
 
-  const offers = useAppSelector((state) => state.offers);
+  const favorites = useAppSelector((state) => state.favorites);
 
-  const favoriteOffers = offers.filter((offer) => offer.isFavorite);
-
-  if (favoriteOffers.length === 0) {
+  if (favorites.length === 0) {
     return <FavoritesBlock />;
   }
 
@@ -29,22 +28,22 @@ export default function FavoritesScreen () {
             <ul className="favorites__list">
               {CITIES.map(({city}) => {
                 //есть ли избранные в этом городе
-                const hasCityOffers = favoriteOffers.some((offer) => offer.city.name === city);
+                const hasCityOffers = favorites.some((offer) => offer.city.name === city);
 
                 if(!hasCityOffers) {
                   return null;
                 }
 
                 // Предложения для текущего этого города
-                const cityOffer = favoriteOffers.filter((offer) => (offer.city.name === city));
+                const cityOffer = favorites.filter((offer) => (offer.city.name === city));
 
                 return (
                   <li className="favorites__locations-items" key = {city}>
                     <div className="favorites__locations locations locations--current">
                       <div className="locations__item">
-                        <a className="locations__item-link" href="#">
+                        <Link className="locations__item-link" to="#">
                           <span>{ city }</span>
-                        </a>
+                        </Link>
                       </div>
                     </div>
                     <div className="favorites__places">

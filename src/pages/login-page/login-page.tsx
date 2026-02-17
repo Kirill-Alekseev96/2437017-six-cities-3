@@ -3,13 +3,17 @@ import { useState, ChangeEvent } from 'react';
 import { AuthData } from '../../types/auth-data';
 import { useAppDispatch } from '../../hooks/useStore';
 
+
 import { loginAction } from '../../store/async-actions/login-action';
+import { useNavigate } from 'react-router-dom';
+import { AppRoute } from '../../const';
 
 type ChangeHandler = ChangeEvent<HTMLInputElement | HTMLTextAreaElement>;
 
 export default function LoginPage (): JSX.Element {
 
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState<AuthData>({
     email: '',
@@ -24,16 +28,14 @@ export default function LoginPage (): JSX.Element {
     });
   }
 
-  async function handleSubmit(evt: React.FormEvent<HTMLFormElement>) {
+  function handleSubmit(evt: React.FormEvent<HTMLFormElement>) {
     evt.preventDefault();
-    const { email, password } = formData;
-    try {
-      const result = await dispatch(loginAction({ email, password })).unwrap();
-      console.log('Успешный вход:', result);
-    } catch (error) {
-      // Ошибка уже залогирована в action
-      alert('Неверный email или пароль');
-    }
+    const email = formData.email.trim();
+    const password = formData.password.trim();
+    dispatch(loginAction({ email, password }))
+      .unwrap()
+      .then(() => navigate(AppRoute.Main))
+      .catch(() => {});
   }
 
 

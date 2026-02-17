@@ -2,6 +2,7 @@
 
 import type { AxiosInstance } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { dropToken } from '../../services/token';
 
 import { State, AppDispatch } from '../type-state';
 import { AuthData } from '../../types/auth-data';
@@ -21,9 +22,23 @@ export const loginAction = createAsyncThunk<UserData, AuthData, {
   async({email, password}, { extra: api}) => {
 
     /*1. Делаем POST запрос с email и password*/
-    const { data } = await api.post<UserData>(APIRoute.Login, { email, password });
+    const response = await api.post<UserData>(APIRoute.Login, { email, password });
     /* 2. Сохраняем токен в localStorage*/
-    saveToken(data.token);
-    return data;
+    saveToken(response.data.token);
+    return response.data;
   },
+);
+
+
+export const logoutAction = createAsyncThunk<void, undefined, {
+  state: State;
+  dispatch: AppDispatch;
+  extra: AxiosInstance;
+}>
+('user/logout',
+  async(_arg, {extra: api}) => {
+    await api.delete(APIRoute.Logout);
+    /*Удаляем токен в localStorage при успехе*/
+    dropToken();
+  }
 );

@@ -10,20 +10,29 @@ import NotFoundPage from '../../pages/not-found-page/not-found-page.tsx';
 
 import Layout from '../layout/layout.tsx';
 import PrivateRoute from '../private-route/private-route.tsx';
-import { AppRoute } from '../../const.ts';
+import { AppRoute, AuthorizationStatus } from '../../const.ts';
 import { checkAuthAction } from '../../store/async-actions/authorization-action.ts';
+import { fetchFavoritesAction } from '../../store/async-actions/favorite-action.ts';
 
 import { useAppSelector, useAppDispatch } from '../../hooks/useStore.ts';
 
 
 export default function App() {
 
+  const authorizationStatus = useAppSelector((state) => state.authStatus);
+
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(checkAuthAction());
   }, [dispatch]);
 
-  const authorizationStatus = useAppSelector((state) => state.authStatus);
+  /* Загружаем избранное, если пользователь авторизован*/
+  useEffect(() => {
+    if (authorizationStatus === AuthorizationStatus.Auth) {
+      dispatch(fetchFavoritesAction());
+    }
+  }, [authorizationStatus, dispatch]);
+
 
   return (
     <HelmetProvider>

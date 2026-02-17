@@ -9,16 +9,30 @@ type ChangeFavoriteStatus = {
   status: number;
 }
 
-export const favoriteAction = createAsyncThunk<Offer, ChangeFavoriteStatus, {
-state: State;
-dispatch: AppDispatch;
-extra: AxiosInstance;
+// 1. ПОЛУЧИТЬ ВСЕ ИЗБРАННЫЕ
+export const fetchFavoritesAction = createAsyncThunk<Offer[], undefined, {
+  state: State;
+  dispatch: AppDispatch;
+  extra: AxiosInstance;
 }>(
-  'card/favorite',
-  async({offerId, status}, {extra:api }) => {
-    const result = await api.post<Offer>(`${APIRoute.Favorites}/${offerId}/${status}`);
+  'favorites/fetchAll',
+  async (_arg, { extra: api }) => {
+    const { data } = await api.get<Offer[]>(`${APIRoute.Favorite}`);
+    return data;
+  }
+);
 
-    return result.data;
+
+// 2. ИЗМЕНИТЬ СТАТУС
+export const favoriteAction = createAsyncThunk<Offer, ChangeFavoriteStatus, {
+  state: State;
+  dispatch: AppDispatch;
+  extra: AxiosInstance;
+}>(
+  'favorites/changeStatus',
+  async ({ offerId, status }, { extra: api }) => {
+    const { data } = await api.post<Offer>(`${APIRoute.Favorite}/${offerId}/${status}`);
+    return data;
 
   }
 );
