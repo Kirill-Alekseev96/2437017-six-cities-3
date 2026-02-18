@@ -25,7 +25,7 @@ export default function SortingFragment ({handleSortingChange, activePlace, acti
     setOpen(!isOpen);
   }
 
-  function fn (event: MouseEvent<HTMLUListElement>) {
+  function handleSortClick (event: MouseEvent<HTMLUListElement>) {
     const element = event.target as HTMLLIElement;
     const textSorting: string | null = element.textContent;
     if (textSorting) {
