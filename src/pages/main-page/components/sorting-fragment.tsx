@@ -20,13 +20,14 @@ export default function SortingFragment ({handleSortingChange, activePlace, acti
     return sort === activePlace ? 'places__option--active' : '';
   }
 
+
   function toggleDropdown () {
     setOpen(!isOpen);
   }
 
-  function handleSortClick (event :MouseEvent<HTMLUListElement>) {
+  function fn (event: MouseEvent<HTMLUListElement>) {
     const element = event.target as HTMLLIElement;
-    const textSorting:string = element.textContent;
+    const textSorting: string | null = element.textContent;
     if (textSorting) {
       handleSortingChange(textSorting);
     }
