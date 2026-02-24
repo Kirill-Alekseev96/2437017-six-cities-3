@@ -1,4 +1,4 @@
-import OfferWrapper from './components/offer__wrapper.tsx';
+import OfferWrapper from './components/offer-wrapper.tsx';
 import MemorizedCardBlock from '../../components/card-block/card-block.tsx';
 import MapBlock from '../../components/map-block/map-block.tsx';
 
@@ -37,7 +37,7 @@ export default function OfferPage (): JSX.Element {
   const mapOffers = currentOffer ? [currentOffer, ...newNearby] : [];
 
   return (
-    <div className="page">
+    <>
       <Helmet>
         <title>6 cities: offer</title>
       </Helmet>
@@ -63,12 +63,13 @@ export default function OfferPage (): JSX.Element {
                 <MemorizedCardBlock
                   key = {offer.id}
                   offer={offer}
+                  block = {'near-places'}
                 />
               ))}
             </div>
           </section>
         </div>
       </main>
-    </div>
+    </>
   );
 }

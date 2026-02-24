@@ -7,9 +7,10 @@ import { memo } from 'react';
 interface OfferCardProps {
   offer: Offer;
   handleHover?: (offer:Offer | null) => void;
+  block: string;
 }
 
-function CardBlock({ offer, handleHover, } :OfferCardProps) :JSX.Element {
+function CardBlock({ offer, handleHover, block} :OfferCardProps) :JSX.Element {
 
   const { id, title, type, price, previewImage, isPremium, isFavorite, rating } = offer;
 
@@ -26,7 +27,7 @@ function CardBlock({ offer, handleHover, } :OfferCardProps) :JSX.Element {
   }
 
   return (
-    <article className="cities__card place-card"
+    <article className={`${block}__card place-card`}
       onMouseEnter = {handleCardMouseEnter}
       onMouseLeave = {handleCardMouseLeave}
     >
@@ -34,12 +35,17 @@ function CardBlock({ offer, handleHover, } :OfferCardProps) :JSX.Element {
       <div className="place-card__mark">
         <span>Premium</span>
       </div>}
-      <div className="cities__image-wrapper place-card__image-wrapper">
+      <div className={`${block}__image-wrapper place-card__image-wrapper`}>
         <Link to ={`/offer/${id}`}>
-          <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place image"/>
+          <img className="place-card__image"
+            src={previewImage}
+            width={block === 'favorites' ? '150' : '260'}
+            height={block === 'favorites' ? '110' : '200'}
+            alt="Place image"
+          />
         </Link>
       </div>
-      <div className="place-card__info">
+      <div className={`place-card__info ${block === 'favorites' ? 'favorites__card-info' : ''}`}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">&euro;{price}</b>

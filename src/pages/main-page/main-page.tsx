@@ -39,49 +39,41 @@ export default function MainPage (): JSX.Element {
     }
   }
 
-  const renderContent = () => {
-    if (status === RequestStatus.Loading) {
-      return <Spinner/>;
-    }
-
-    if (filteredOffers.length === 0) {
-      return <MainEmpty />;
-    }
-
-    return (
-      <>
-        <ListOffers
-          filteredOffers = {filteredOffers}
-          activeCity = {activeCity}
-          handleHover = {handleHover}
-        />
-        <div className="cities__right-section">
-          <MapBlock
-            key={activeCity}
-            offers = { filteredOffers }
-            activeOfferId = { activeOfferId }
-          />
-        </div>
-      </>
-    );
-  };
+  if (status === RequestStatus.Loading) {
+    return <Spinner/>;
+  }
 
   return (
-    <div className="page page--gray page--main">
-
+    filteredOffers.length === 0 ? (
+      <MainEmpty
+        activeCity={activeCity}
+        setActiveCity={setActiveCity}
+      />
+    ) : (
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <TabsFragment
-          activeCity = {activeCity}
-          setActiveCity = {setActiveCity}
+          activeCity={activeCity}
+          setActiveCity={setActiveCity}
         />
         <div className="cities">
           <div className="cities__places-container container">
-            {renderContent()}
+            <ListOffers
+              filteredOffers={filteredOffers}
+              activeCity={activeCity}
+              handleHover={handleHover}
+            />
+            <div className="cities__right-section">
+              <MapBlock
+                key={activeCity}
+                offers={filteredOffers}
+                activeOfferId={activeOfferId}
+              />
+            </div>
           </div>
         </div>
       </main>
-    </div>
+    )
   );
 }
 

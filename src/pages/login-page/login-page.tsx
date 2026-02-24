@@ -40,7 +40,7 @@ export default function LoginPage (): JSX.Element {
 
 
   return (
-    <div className="page page--gray page--login">
+    <>
       <Helmet>
         <title>6 cities: authorization</title>
       </Helmet>
@@ -70,7 +70,7 @@ export default function LoginPage (): JSX.Element {
           </section>
         </div>
       </main>
-    </div>
+    </>
   );
 }
 

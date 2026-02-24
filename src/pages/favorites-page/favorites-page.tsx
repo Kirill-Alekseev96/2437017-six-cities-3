@@ -1,4 +1,4 @@
-import CardBlock from '../../components/card-block/card-block.tsx';
+import MemorizedCardBlock from '../../components/card-block/card-block.tsx';
 import FavoritesBlock from './components/favorites-empty.tsx';
 
 import { CITIES } from '../../const.ts';
@@ -48,9 +48,10 @@ export default function FavoritesScreen () {
                     </div>
                     <div className="favorites__places">
                       {cityOffer.map((offer) => (
-                        <CardBlock
+                        <MemorizedCardBlock
                           key = {offer.id}
                           offer={offer}
+                          block = {'favorites'}
                         />
                       ))}
                     </div>

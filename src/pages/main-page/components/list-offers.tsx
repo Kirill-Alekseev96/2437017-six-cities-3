@@ -61,6 +61,7 @@ export default function ListOffers ({filteredOffers, activeCity, handleHover} :L
             key = { offer.id }
             offer = { offer }
             handleHover = { handleHover }
+            block = {'cities'}
           />
         ))};
       </div>
