@@ -16,7 +16,7 @@ export default function FavoritesScreen () {
   }
 
   return (
-    <div className="page">
+    <>
       <Helmet>
         <title>6 cities: favorites</title>
       </Helmet>
@@ -62,7 +62,7 @@ export default function FavoritesScreen () {
           </section>
         </div>
       </main>
-    </div>
+    </>
   );
 }
 
