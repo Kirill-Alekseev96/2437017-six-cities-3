@@ -12,6 +12,7 @@ import { Offer } from '../types/offer-data';
 import { RequestStatus, AuthorizationStatus } from '../const';
 import { UserData } from '../types/user-data';
 import { CommentData } from '../types/comment-data';
+import { checkAuthAction } from './async-actions/authorization-action';
 
 type OffersState = {
   offers: Offer[];
@@ -137,6 +138,14 @@ export const reducer = createReducer(initialState, (builder) => {
       state.favorites = action.payload;
     })
 
+    .addCase(checkAuthAction.fulfilled, (state, action) => {
+      state.userData = action.payload;
+      state.authStatus = AuthorizationStatus.Auth;
+    })
+    .addCase(checkAuthAction.rejected, (state) => {
+      state.userData = null;
+      state.authStatus = AuthorizationStatus.NoAuth;
+    })
 
     /*Изменение статуса (добавить/удалить)*/
     .addCase(favoriteAction.fulfilled, (state, action) => {

@@ -1,4 +1,4 @@
-const STYLES_SVG = {
+const STYLES = {
   card: {
     name: 'place-card',
     width: '18',
@@ -11,4 +11,4 @@ const STYLES_SVG = {
   },
 };
 
-export { STYLES_SVG };
+export { STYLES };

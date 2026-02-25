@@ -37,6 +37,7 @@ enum AppRoute {
   Login = '/login',
   Favorites = '/favorites',
   Offer = '/offer/:id',
+  notFound = '/404',
 }
 
 const APIRoute = {

@@ -23,6 +23,13 @@ export default function MapBlock ({offers, activeOfferId, className = 'cities__m
 
   useEffect (() => {
     if (map) {
+
+      map.eachLayer((layer) => {
+        if (layer instanceof leaflet.Marker) {
+          layer.remove();
+        }
+      });
+
       offers.forEach((offer) => {
         leaflet
           .marker( //создание маркера

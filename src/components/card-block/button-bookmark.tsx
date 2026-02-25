@@ -1,6 +1,6 @@
 import { favoriteAction } from '../../store/async-actions/favorite-action.ts';
 import { useAppDispatch } from '../../hooks/useStore.ts';
-import { STYLES_SVG } from './const.ts';
+import { STYLES } from './const.ts';
 
 import { useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../../hooks/useStore.ts';
@@ -16,7 +16,7 @@ interface ButtonBookmarkProps {
 export default function ButtonBookmark ({ id, isFavorite = false, variant}:ButtonBookmarkProps) {
 
   const [isPending, setIsPending] = useState(false);
-  const { name, width, height } = STYLES_SVG[variant];
+  const { name, width, height } = STYLES[variant];
 
   const authStatus = useAppSelector((state) => state.authStatus);
   const isAuthorized = authStatus === AuthorizationStatus.Auth;

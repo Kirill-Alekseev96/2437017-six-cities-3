@@ -1,0 +1,29 @@
+.not-found {
+  height: 100vh;
+  display: grid;
+  place-items: center;
+  background: #ffffff;
+}
+
+.not-found__content {
+  text-align: center;
+}
+
+.not-found__title {
+  font-size: 8rem;
+  color: #cbd5e1;
+  margin: 0;
+}
+
+.not-found__text {
+  color: #64748b;
+  margin: 0 0 2rem;
+}
+
+.not-found__link {
+  color: #ff0000;
+  background-color: #cbd5e1;
+  border-radius: 25px;
+  padding: 10px;
+  text-decoration: none;
+}

@@ -20,7 +20,7 @@ export default function SortingFragment ({handleSortingChange, activePlace, acti
     return sort === activePlace ? 'places__option--active' : '';
   }
 
-  function toggleDropdown () {
+  function handleToggleDropdown () {
     setOpen(!isOpen);
   }
 
@@ -35,7 +35,7 @@ export default function SortingFragment ({handleSortingChange, activePlace, acti
   return (
     <form className="places__sorting" action="#" method="get">
       <span className="places__sorting-caption">Sort by</span>{' '}
-      <span onClick={(toggleDropdown)} className="places__sorting-type" tabIndex={0}>
+      <span onClick={(handleToggleDropdown)} className="places__sorting-type" tabIndex={0}>
         {activePlace}
         <svg className="places__sorting-arrow" width="7" height="4">
           <use xlinkHref="#icon-arrow-select"></use>

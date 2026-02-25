@@ -7,6 +7,7 @@ import { useAppDispatch } from '../../hooks/useStore';
 import { loginAction } from '../../store/async-actions/login-action';
 import { useNavigate } from 'react-router-dom';
 import { AppRoute } from '../../const';
+import { processErrorHandle } from '../../components/error-message/error-process';
 
 type ChangeHandler = ChangeEvent<HTMLInputElement | HTMLTextAreaElement>;
 
@@ -28,10 +29,22 @@ export default function LoginPage (): JSX.Element {
     });
   }
 
+  const validatePassword = (password: string): boolean => {
+    const hasLetter = /[a-zA-Z]/.test(password);
+    const hasDigit = /\d/.test(password);
+    return hasLetter && hasDigit;
+  };
+
   function handleSubmit(evt: React.FormEvent<HTMLFormElement>) {
     evt.preventDefault();
     const email = formData.email.trim();
     const password = formData.password.trim();
+
+    if (!validatePassword(password)) {
+      processErrorHandle('Пароль должен содержать букву и цифру');
+      return;
+    }
+
     dispatch(loginAction({ email, password }))
       .unwrap()
       .then(() => navigate(AppRoute.Main))

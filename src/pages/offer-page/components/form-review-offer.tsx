@@ -15,7 +15,7 @@ function ReviewForm () {
     comment: '',
   });
 
-  function fieldChangeHandle (evt:ChangeHandler) {
+  function handleFieldChange (evt:ChangeHandler) {
     const { name, value, type } = evt.target;
 
     if (type === 'radio') {
@@ -66,7 +66,7 @@ function ReviewForm () {
       <div className="reviews__rating-form form__rating">
         {RATING_STARS.map(({value , title}) => (
           <Fragment key={value}>
-            <input onChange={ fieldChangeHandle } className="form__rating-input visually-hidden" name="rating" value={value} id={`${value}-stars`} type="radio" checked={formData.rating === value}/>
+            <input onChange={ handleFieldChange } className="form__rating-input visually-hidden" name="rating" value={value} id={`${value}-stars`} type="radio" checked={formData.rating === value} disabled = {isSubmitting}/>
             <label htmlFor={`${value}-stars`} className="reviews__rating-label form__rating-label" title={title}>
               <svg className="form__star-image" width="37" height="33">
                 <use xlinkHref="#icon-star"></use>
@@ -75,7 +75,7 @@ function ReviewForm () {
           </Fragment >
         ))}
       </div>
-      <textarea onChange={ fieldChangeHandle } className="reviews__textarea form__textarea" id="review" name='comment' value = {formData.comment} placeholder="Tell how was your stay, what you like and what can be improved"></textarea>
+      <textarea onChange={ handleFieldChange } className="reviews__textarea form__textarea" id="review" name='comment' value = {formData.comment} placeholder="Tell how was your stay, what you like and what can be improved" disabled = {isSubmitting}></textarea>
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
           To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.

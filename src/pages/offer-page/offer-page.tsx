@@ -3,12 +3,13 @@ import MemorizedCardBlock from '../../components/card-block/card-block.tsx';
 import MapBlock from '../../components/map-block/map-block.tsx';
 
 import { Helmet } from 'react-helmet-async';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useAppSelector, useAppDispatch } from '../../hooks/useStore.ts';
 
 import { fetchCommentsAction, fetchNearbyOffersAction, fetchOfferById } from '../../store/async-actions/offer-action.ts';
 import { Offer } from '../../types/offer-data.ts';
+import { AppRoute } from '../../const.ts';
 
 
 export default function OfferPage (): JSX.Element {
@@ -20,8 +21,8 @@ export default function OfferPage (): JSX.Element {
 
   const offersInNearby: Offer[] = offers.filter((offer) => nearbyOffers.some((nearby) => nearby.id === offer.id));
 
-
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const { id } = useParams<{ id: string }>(); // получаем текущее id стр.
 
@@ -29,9 +30,11 @@ export default function OfferPage (): JSX.Element {
     if (id) {
       dispatch(fetchOfferById(id));
       dispatch(fetchNearbyOffersAction(id));
-      dispatch(fetchCommentsAction(id));
+      dispatch(fetchCommentsAction(id))
+        .unwrap()
+        .catch(() => navigate(AppRoute.notFound));
     }
-  }, [dispatch, id]);
+  }, [dispatch, id, navigate]);
 
   const newNearby = offersInNearby.slice(0, 3);
   const mapOffers = currentOffer ? [currentOffer, ...newNearby] : [];
