@@ -1,11 +1,12 @@
 import { memo } from 'react';
+import { OFFER_IMAGES } from '../../../const';
 
 interface imagesProps {
   images: string[];
 }
 
 function OfferGallery ({images}:imagesProps){
-  const displayImages = images?.slice(0, 6) || [];
+  const displayImages = images?.slice(OFFER_IMAGES.MIN_COUNT, OFFER_IMAGES.MAX_COUNT) || [];
   return (
     <div className="offer__gallery-container container">
       <div className="offer__gallery">

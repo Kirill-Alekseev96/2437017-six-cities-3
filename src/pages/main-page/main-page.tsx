@@ -47,21 +47,21 @@ export default function MainPage (): JSX.Element {
     filteredOffers.length === 0 ? (
       <MainEmpty
         activeCity={activeCity}
-        setActiveCity={setActiveCity}
+        onCityChange={setActiveCity}
       />
     ) : (
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <TabsFragment
           activeCity={activeCity}
-          setActiveCity={setActiveCity}
+          onCityChange={setActiveCity}
         />
         <div className="cities">
           <div className="cities__places-container container">
             <ListOffers
               filteredOffers={filteredOffers}
               activeCity={activeCity}
-              handleHover={handleHover}
+              onHover={handleHover}
             />
             <div className="cities__right-section">
               <MapBlock

@@ -3,12 +3,12 @@ import { MouseEvent, useEffect, useState } from 'react';
 import { SORT_OPTIONS } from '../../../const';
 
 interface SortingFragmentProps {
-  handleSortingChange: (sorting: string) => void;
+  onSortingChange: (sorting: string) => void;
   activePlace:string;
   activeCity: string;
 }
 
-export default function SortingFragment ({handleSortingChange, activePlace, activeCity}:SortingFragmentProps) :JSX.Element {
+export default function SortingFragment ({onSortingChange, activePlace, activeCity}:SortingFragmentProps) :JSX.Element {
 
   const [isOpen, setOpen] = useState(false);
 
@@ -28,7 +28,7 @@ export default function SortingFragment ({handleSortingChange, activePlace, acti
     const element = event.target as HTMLLIElement;
     const textSorting: string | null = element.textContent;
     if (textSorting) {
-      handleSortingChange(textSorting);
+      onSortingChange(textSorting);
     }
   }
 

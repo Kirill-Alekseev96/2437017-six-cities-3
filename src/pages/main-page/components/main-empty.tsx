@@ -1,15 +1,15 @@
 import TabsFragment from './tabs-fragment.tsx';
 interface MainEmptyProps {
   activeCity: string;
-  setActiveCity: (city: string) => void;
+  onCityChange: (city: string) => void;
 }
 
-export default function MainEmpty ({activeCity, setActiveCity}:MainEmptyProps) {
+export default function MainEmpty ({activeCity, onCityChange}:MainEmptyProps) {
   return (
     < main className="page__main page__main--index page__main--index-empty">
       <TabsFragment
         activeCity = {activeCity}
-        setActiveCity = {setActiveCity}
+        onCityChange = {onCityChange}
       />
       <div className="cities">
         <div className="cities__places-container cities__places-container--empty container">

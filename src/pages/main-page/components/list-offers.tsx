@@ -8,10 +8,10 @@ import { useState, useEffect } from 'react';
 interface ListOffersProps {
   filteredOffers: Offer[];
   activeCity: string;
-  handleHover?: (offer:Offer | null) => void;
+  onHover?: (offer:Offer | null) => void;
 }
 
-export default function ListOffers ({filteredOffers, activeCity, handleHover} :ListOffersProps) {
+export default function ListOffers ({filteredOffers, activeCity, onHover} :ListOffersProps) {
 
   const [sortingCards, setSortingCard] = useState<Offer[]>(filteredOffers);
   const [activePlace, setActivePlace] = useState('Popular');
@@ -51,7 +51,7 @@ export default function ListOffers ({filteredOffers, activeCity, handleHover} :L
       <h2 className="visually-hidden">Places</h2>
       <b className="places__found">{`${filteredOffers.length}`} places to stay in {activeCity}</b>
       <SortingFragment
-        handleSortingChange = { handleSortingChange }
+        onSortingChange = { handleSortingChange }
         activePlace = { activePlace }
         activeCity = { activeCity }
       />
@@ -60,7 +60,7 @@ export default function ListOffers ({filteredOffers, activeCity, handleHover} :L
           <MemorizedCardBlock
             key = { offer.id }
             offer = { offer }
-            handleHover = { handleHover }
+            onHover = { onHover }
             block = {'cities'}
           />
         ))};

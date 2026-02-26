@@ -2,10 +2,10 @@ import {CITIES} from '../../../const.ts';
 import { Link } from 'react-router-dom';
 interface TabsFragmentProps {
   activeCity: string;
-  setActiveCity: (city: string) => void;
+  onCityChange: (city: string) => void;
 }
 
-export default function TabsFragment ({activeCity, setActiveCity} :TabsFragmentProps): JSX.Element {
+export default function TabsFragment ({activeCity, onCityChange} :TabsFragmentProps): JSX.Element {
 
   function getActiveClass (city: string): string {
     return city === activeCity ? 'tabs__item--active' : '';
@@ -19,7 +19,7 @@ export default function TabsFragment ({activeCity, setActiveCity} :TabsFragmentP
             <li className="locations__item" key={city}>
               <Link to = '' className= {`locations__item-link tabs__item ${getActiveClass(city)}`}
                 onClick = {() => {
-                  setActiveCity(city);
+                  onCityChange(city);
                 }}
               >
                 <span>{city}</span>

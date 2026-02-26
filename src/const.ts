@@ -1,5 +1,22 @@
 const TIMEOUT_SHOW_ERROR = 2000;
 
+const COMMENT = {
+  MIN_LENGTH: 50,
+  MAX_LENGTH: 300,
+  MIN_COUNT: 0,
+  MAX_COUNT: 10,
+} as const;
+
+const NEARBY_OFFERS = {
+  MIN_COUNT: 0,
+  MAX_COUNT: 3,
+} as const;
+
+const OFFER_IMAGES = {
+  MIN_COUNT: 0,
+  MAX_COUNT: 6,
+} as const;
+
 const CITIES = [
   { city: 'Paris', lat: 48.8566, lon: 2.3522 },
   { city: 'Cologne', lat: 50.9385, lon: 6.9591 },
@@ -61,4 +78,4 @@ enum RequestStatus {
   Failed,
 }
 
-export{TIMEOUT_SHOW_ERROR, CITIES, ZOOM, RATING_STARS, AppRoute, AuthorizationStatus, SORT_OPTIONS, SORT_TYPES, APIRoute, RequestStatus};
+export{OFFER_IMAGES, NEARBY_OFFERS, COMMENT, TIMEOUT_SHOW_ERROR, CITIES, ZOOM, RATING_STARS, AppRoute, AuthorizationStatus, SORT_OPTIONS, SORT_TYPES, APIRoute, RequestStatus};

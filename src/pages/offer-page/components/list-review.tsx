@@ -1,10 +1,11 @@
+import { COMMENT } from '../../../const.ts';
 import { useAppSelector } from '../../../hooks/useStore.ts';
 import { CommentData } from '../../../types/comment-data.ts';
 
 export default function ListReview () {
 
-  const comments:CommentData[] = useAppSelector((state) => state.comments || []);
-  const displayCount = comments.length > 10 ? '10' : comments.length;
+  const comments = useAppSelector((state) => state.comments);
+  const displayCount = comments.length > COMMENT.MAX_COUNT ? COMMENT.MAX_COUNT : comments.length;
 
   // Функция для форматирования даты
   const formatReviewDate = (dateString: string) => {
@@ -20,7 +21,7 @@ export default function ListReview () {
       <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{displayCount}</span></h2>
       <ul className="reviews__list">
 
-        {comments.slice(0, 10).map((comment:CommentData) =>(
+        {comments.slice(COMMENT.MIN_COUNT, COMMENT.MAX_COUNT).map((comment:CommentData) =>(
           <li className="reviews__item" key={comment?.id}>
             <div className="reviews__user user">
               <div className="reviews__avatar-wrapper user__avatar-wrapper">

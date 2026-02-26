@@ -1,4 +1,4 @@
-import { RATING_STARS } from '../../../const.ts';
+import { COMMENT, RATING_STARS } from '../../../const.ts';
 import { useState, ChangeEvent, Fragment, memo } from 'react';
 import { commentAction } from '../../../store/async-actions/offer-action.ts';
 import { useAppDispatch } from '../../../hooks/useStore.ts';
@@ -34,7 +34,7 @@ function ReviewForm () {
   const dispatch = useAppDispatch();
   const { id } = useParams<{ id: string }>(); // получаем текущее id стр.
 
-  const isValid = formData.comment.length >= 50 && formData.comment.length <= 300 && formData.rating > 0;
+  const isValid = formData.comment.length >= COMMENT.MIN_LENGTH && formData.comment.length <= COMMENT.MAX_LENGTH && formData.rating > 0;
 
   function handleSubmit (evt: React.FormEvent<HTMLFormElement>) {
     evt.preventDefault();

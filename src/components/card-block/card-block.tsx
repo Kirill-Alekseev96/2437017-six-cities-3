@@ -6,23 +6,23 @@ import { memo } from 'react';
 
 interface OfferCardProps {
   offer: Offer;
-  handleHover?: (offer:Offer | null) => void;
+  onHover?: (offer:Offer | null) => void;
   block: string;
 }
 
-function CardBlock({ offer, handleHover, block} :OfferCardProps) :JSX.Element {
+function CardBlock({ offer, onHover, block} :OfferCardProps) :JSX.Element {
 
   const { id, title, type, price, previewImage, isPremium, isFavorite, rating } = offer;
 
   function handleCardMouseEnter () {
-    if (handleHover) {
-      handleHover(offer);
+    if (onHover) {
+      onHover(offer);
     }
   }
 
   function handleCardMouseLeave () {
-    if (handleHover) {
-      handleHover(null);
+    if (onHover) {
+      onHover(null);
     }
   }
 
