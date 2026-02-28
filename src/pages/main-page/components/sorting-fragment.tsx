@@ -29,6 +29,7 @@ export default function SortingFragment ({onSortingChange, activePlace, activeCi
     const textSorting: string | null = element.textContent;
     if (textSorting) {
       onSortingChange(textSorting);
+      setOpen(false);
     }
   }
 

@@ -50,10 +50,10 @@ export default function OfferWrapper ({currentOffer, authorizationStatus}: Offer
               {type}
             </li>
             <li className="offer__feature offer__feature--bedrooms">
-              {bedrooms}
+              {bedrooms} Bedrooms
             </li>
             <li className="offer__feature offer__feature--adults">
-              {maxAdults}
+              Max {maxAdults} adults
             </li>
           </ul>
           <div className="offer__price">
