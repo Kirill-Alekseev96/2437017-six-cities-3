@@ -8,7 +8,7 @@ import { Offer } from '../../types/offer-data.ts';
 import { fetchAllOffers } from '../../store/async-actions/offers-action.ts';
 import { RequestStatus } from '../../const.ts';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useAppSelector, useAppDispatch } from '../../hooks/useStore.ts';
 
 export default function MainPage (): JSX.Element {
@@ -31,13 +31,13 @@ export default function MainPage (): JSX.Element {
 
   const filteredOffers = offers.filter((offer) => offer.city.name === activeCity);
 
-  function handleHover (offer :Offer | null) {
+  const handleHover = useCallback ((offer :Offer | null) => {
     if (offer) {
       setActiveOfferId(offer.id);
     }else {
       setActiveOfferId(null);
     }
-  }
+  },[]);
 
   if (status === RequestStatus.Loading) {
     return <Spinner/>;

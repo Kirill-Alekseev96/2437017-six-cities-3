@@ -10,6 +10,7 @@ import { useAppSelector, useAppDispatch } from '../../hooks/useStore.ts';
 import { fetchCommentsAction, fetchNearbyOffersAction, fetchOfferById } from '../../store/async-actions/offer-action.ts';
 import { Offer } from '../../types/offer-data.ts';
 import { AppRoute, NEARBY_OFFERS } from '../../const.ts';
+import { fetchAllOffers } from '../../store/async-actions/offers-action.ts';
 
 
 export default function OfferPage (): JSX.Element {
@@ -35,6 +36,12 @@ export default function OfferPage (): JSX.Element {
         .catch(() => navigate(AppRoute.notFound));
     }
   }, [dispatch, id, navigate]);
+
+  useEffect(() => {
+    if (offers.length === 0) {
+      dispatch(fetchAllOffers());
+    }
+  }, []);
 
   const newNearby = offersInNearby.slice(NEARBY_OFFERS.MIN_COUNT, NEARBY_OFFERS.MAX_COUNT);
   const mapOffers = currentOffer ? [currentOffer, ...newNearby] : [];

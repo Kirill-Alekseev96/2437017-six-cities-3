@@ -1,5 +1,5 @@
 import { Helmet } from 'react-helmet-async';
-import { useState, ChangeEvent } from 'react';
+import { useState, ChangeEvent, useCallback } from 'react';
 import { AuthData } from '../../types/auth-data';
 import { useAppDispatch } from '../../hooks/useStore';
 
@@ -21,13 +21,13 @@ export default function LoginPage (): JSX.Element {
     password: '',
   });
 
-  function handleFiledChange (evt: ChangeHandler) {
+  const handleFiledChange = useCallback((evt: ChangeHandler) => {
     const { value, name } = evt.target;
     setFormData({
       ...formData,
       [name]: value,
     });
-  }
+  }, []);
 
   const validatePassword = (password: string): boolean => {
     const hasLetter = /[a-zA-Z]/.test(password);
@@ -35,7 +35,7 @@ export default function LoginPage (): JSX.Element {
     return hasLetter && hasDigit;
   };
 
-  function handleSubmit(evt: React.FormEvent<HTMLFormElement>) {
+  const handleSubmit = useCallback((evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     const email = formData.email.trim();
     const password = formData.password.trim();
@@ -49,7 +49,7 @@ export default function LoginPage (): JSX.Element {
       .unwrap()
       .then(() => navigate(AppRoute.Main))
       .catch(() => {});
-  }
+  },[formData, dispatch, navigate]);
 
 
   return (
