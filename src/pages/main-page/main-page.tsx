@@ -1,23 +1,24 @@
 import TabsFragment from './components/tabs-fragment.tsx';
 import MapBlock from '../../components/map-block/map-block.tsx';
-import ListOffers from './components/list-offers.tsx';
+import MemorizedListOffers from './components/list-offers.tsx';
 import MainEmpty from './components/main-empty.tsx';
 import Spinner from '../../components/spinner/spinner.tsx';
 
 import { Offer } from '../../types/offer-data.ts';
 import { fetchAllOffers } from '../../store/async-actions/offers-action.ts';
-import { RequestStatus } from '../../const.ts';
 
 import { useState, useEffect, useCallback } from 'react';
 import { useAppSelector, useAppDispatch } from '../../hooks/useStore.ts';
+import { selectOffers } from '../../store/selectors/base-selectors.ts';
+import { selectHasAnyFavorite, selectIsLoading } from './selectors.ts';
 
 export default function MainPage (): JSX.Element {
 
   const dispatch = useAppDispatch();
 
-  const offers = useAppSelector((state) => state.offers);
-  const status = useAppSelector((state) => state.status);
-  const hasAnyFavorite = offers.some((offer) => offer.isFavorite);
+  const offers = useAppSelector(selectOffers);
+  const isLoading = useAppSelector(selectIsLoading);
+  const hasAnyFavorite = useAppSelector(selectHasAnyFavorite);
 
   useEffect(() => {
     if (!hasAnyFavorite) {
@@ -39,7 +40,7 @@ export default function MainPage (): JSX.Element {
     }
   },[]);
 
-  if (status === RequestStatus.Loading) {
+  if (isLoading) {
     return <Spinner/>;
   }
 
@@ -58,7 +59,7 @@ export default function MainPage (): JSX.Element {
         />
         <div className="cities">
           <div className="cities__places-container container">
-            <ListOffers
+            <MemorizedListOffers
               filteredOffers={filteredOffers}
               activeCity={activeCity}
               onHover={handleHover}

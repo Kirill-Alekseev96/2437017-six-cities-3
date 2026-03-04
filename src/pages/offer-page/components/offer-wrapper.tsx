@@ -3,7 +3,7 @@ import MemorizedReviewForm from './form-review-offer.tsx';
 import ListReview from './list-review.tsx';
 import MemorizedOfferGallery from './gallery-fragment.tsx';
 import { AuthorizationStatus } from '../../../const.ts';
-import ButtonBookmark from '../../../components/card-block/button-bookmark.tsx';
+import MemorizedButtonBookmark from '../../../components/card-block/button-bookmark.tsx';
 import Spinner from '../../../components/spinner/spinner.tsx';
 
 interface OfferWrapperProps {
@@ -32,7 +32,7 @@ export default function OfferWrapper ({currentOffer, authorizationStatus}: Offer
             <h1 className="offer__name">
               {title}
             </h1>
-            <ButtonBookmark
+            <MemorizedButtonBookmark
               id = {id}
               isFavorite = {isFavorite}
               variant = 'offer'

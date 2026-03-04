@@ -27,7 +27,7 @@ export default function LoginPage (): JSX.Element {
       ...formData,
       [name]: value,
     });
-  }, []);
+  }, [formData]);
 
   const validatePassword = (password: string): boolean => {
     const hasLetter = /[a-zA-Z]/.test(password);

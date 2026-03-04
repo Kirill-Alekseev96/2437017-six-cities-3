@@ -6,14 +6,14 @@ import { useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../../hooks/useStore.ts';
 import { AppRoute, AuthorizationStatus } from '../../const.ts';
 import { fetchFavoritesAction } from '../../store/async-actions/favorite-action.ts';
-import { useState } from 'react';
+import { memo, useState } from 'react';
 interface ButtonBookmarkProps {
   id: string;
   isFavorite?: boolean;
   variant: 'card' | 'offer';
 }
 
-export default function ButtonBookmark ({ id, isFavorite = false, variant}:ButtonBookmarkProps) {
+function ButtonBookmark ({ id, isFavorite = false, variant}:ButtonBookmarkProps) {
 
   const [isPending, setIsPending] = useState(false);
   const { name, width, height } = STYLES[variant];
@@ -64,3 +64,7 @@ export default function ButtonBookmark ({ id, isFavorite = false, variant}:Butto
     </button>
   );
 }
+
+const MemorizedButtonBookmark = memo(ButtonBookmark);
+
+export default MemorizedButtonBookmark;

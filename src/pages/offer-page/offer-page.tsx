@@ -11,16 +11,17 @@ import { fetchCommentsAction, fetchNearbyOffersAction, fetchOfferById } from '..
 import { Offer } from '../../types/offer-data.ts';
 import { AppRoute, NEARBY_OFFERS } from '../../const.ts';
 import { fetchAllOffers } from '../../store/async-actions/offers-action.ts';
+import { selectAuthorizationStatus, selectCurrentOffer, selectOffers } from '../../store/selectors/base-selectors.ts';
+import { selectorNewNearby } from './selectors.ts';
 
 
 export default function OfferPage (): JSX.Element {
 
-  const offers = useAppSelector((state) => state.offers);
-  const currentOffer = useAppSelector((state) => state.offer);
-  const nearbyOffers = useAppSelector((state) => state.nearbyOffers);
-  const authorizationStatus = useAppSelector((state) => state.authStatus);
+  const currentOffer = useAppSelector(selectCurrentOffer);
+  const authorizationStatus = useAppSelector(selectAuthorizationStatus);
 
-  const offersInNearby: Offer[] = offers.filter((offer) => nearbyOffers.some((nearby) => nearby.id === offer.id));
+  const offers = useAppSelector(selectOffers);
+  const offersInNearby: Offer[] = useAppSelector(selectorNewNearby);
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();

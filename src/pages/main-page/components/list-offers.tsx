@@ -3,7 +3,7 @@ import MemorizedCardBlock from '../../../components/card-block/card-block.tsx';
 import { Offer } from '../../../types/offer-data.ts';
 import { SORT_TYPES } from '../../../const.ts';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback, memo } from 'react';
 
 interface ListOffersProps {
   filteredOffers: Offer[];
@@ -11,14 +11,14 @@ interface ListOffersProps {
   onHover?: (offer:Offer | null) => void;
 }
 
-export default function ListOffers ({filteredOffers, activeCity, onHover} :ListOffersProps) {
+function ListOffers ({filteredOffers, activeCity, onHover} :ListOffersProps) {
 
   const [sortingCards, setSortingCard] = useState<Offer[]>(filteredOffers);
   const [activePlace, setActivePlace] = useState('Popular');
 
-  function handleSortingChange(textSorting: string) {
+  const handleSortingChange = useCallback((textSorting: string) => {
     setActivePlace(textSorting);
-  }
+  },[]);
 
   useEffect(()=> {
     setActivePlace('Popular');
@@ -68,3 +68,8 @@ export default function ListOffers ({filteredOffers, activeCity, onHover} :ListO
     </section>
   );
 }
+
+
+const MemorizedListOffers = memo(ListOffers);
+
+export default MemorizedListOffers;

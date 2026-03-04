@@ -1,4 +1,4 @@
-import ButtonBookmark from './button-bookmark.tsx';
+import MemorizedButtonBookmark from './button-bookmark.tsx';
 import { Offer } from '../../types/offer-data.ts';
 
 import { Link } from 'react-router-dom';
@@ -51,7 +51,7 @@ function CardBlock({ offer, onHover, block} :OfferCardProps) :JSX.Element {
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <ButtonBookmark
+          <MemorizedButtonBookmark
             id = {id}
             isFavorite = {isFavorite}
             variant = 'card'
