@@ -7,10 +7,11 @@ import Spinner from '../../components/spinner/spinner.tsx';
 import { Offer } from '../../types/offer-data.ts';
 import { fetchAllOffers } from '../../store/async-actions/offers-action.ts';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 import { useAppSelector, useAppDispatch } from '../../hooks/useStore.ts';
-import { selectOffers } from '../../store/selectors/base-selectors.ts';
+import { selectCity, selectOffers } from '../../store/selectors/base-selectors.ts';
 import { selectHasAnyFavorite, selectIsLoading } from './selectors.ts';
+import { setCity } from '../../store/slice/offers-slice.ts';
 
 export default function MainPage (): JSX.Element {
 
@@ -19,6 +20,13 @@ export default function MainPage (): JSX.Element {
   const offers = useAppSelector(selectOffers);
   const isLoading = useAppSelector(selectIsLoading);
   const hasAnyFavorite = useAppSelector(selectHasAnyFavorite);
+  const activeCity = useAppSelector(selectCity);
+
+  const [activeOfferId, setActiveOfferId] = useState<string | null>(null);
+  const filteredOffers = useMemo(() =>
+    offers.filter((offer) => offer.city.name === activeCity),
+  [offers, activeCity]
+  );
 
   useEffect(() => {
     if (!hasAnyFavorite) {
@@ -26,11 +34,9 @@ export default function MainPage (): JSX.Element {
     }
   }, [dispatch, hasAnyFavorite]);
 
-  const [activeCity, setActiveCity] = useState('Paris');
-
-  const [activeOfferId, setActiveOfferId] = useState<string | null>(null);
-
-  const filteredOffers = offers.filter((offer) => offer.city.name === activeCity);
+  const handleCityChange = useCallback((city: string) => {
+    dispatch(setCity(city));
+  }, [dispatch]);
 
   const handleHover = useCallback ((offer :Offer | null) => {
     if (offer) {
@@ -48,14 +54,14 @@ export default function MainPage (): JSX.Element {
     filteredOffers.length === 0 ? (
       <MainEmpty
         activeCity={activeCity}
-        onCityChange={setActiveCity}
+        onCityChange={handleCityChange}
       />
     ) : (
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <TabsFragment
           activeCity={activeCity}
-          onCityChange={setActiveCity}
+          onCityChange={handleCityChange}
         />
         <div className="cities">
           <div className="cities__places-container container">

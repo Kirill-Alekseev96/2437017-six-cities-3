@@ -6,10 +6,11 @@ import { CITIES } from '../../const.ts';
 import { Helmet } from 'react-helmet-async';
 import { useAppSelector } from '../../hooks/useStore.ts';
 import { Link } from 'react-router-dom';
+import { selectFavorites } from '../../store/selectors/base-selectors.ts';
 
 export default function FavoritesScreen () {
 
-  const favorites = useAppSelector((state) => state.favorites);
+  const favorites = useAppSelector(selectFavorites);
 
   if (favorites.length === 0) {
     return <FavoritesBlock />;

@@ -1,6 +1,6 @@
 import { createReducer } from '@reduxjs/toolkit';
 
-import { fetchAllOffers } from './async-actions/offers-action';
+// import { fetchAllOffers } from './async-actions/offers-action';
 import { commentAction, fetchCommentsAction, fetchOfferById } from './async-actions/offer-action';
 
 import { fetchFavoritesAction, favoriteAction } from './async-actions/favorite-action';
@@ -41,47 +41,47 @@ const initialState:OffersState = {
 export const reducer = createReducer(initialState, (builder) => {
   builder
 
-    /*Получение Offers*/
-    .addCase(fetchAllOffers.pending, (state) => {
-      state.status = RequestStatus.Loading;
-    })
+  /*Получение Offers*/
+  // .addCase(fetchAllOffers.pending, (state) => {
+  //   state.status = RequestStatus.Loading;
+  // })
 
-    .addCase(fetchAllOffers.fulfilled, (state, action) => {
-      state.status = RequestStatus.Success;
-      state.offers = action.payload;
-    })
+  // .addCase(fetchAllOffers.fulfilled, (state, action) => {
+  //   state.status = RequestStatus.Success;
+  //   state.offers = action.payload;
+  // })
 
-    .addCase(fetchAllOffers.rejected, (state) => {
-      state.status = RequestStatus.Failed;
-    })
+  // .addCase(fetchAllOffers.rejected, (state) => {
+  //   state.status = RequestStatus.Failed;
+  // })
 
-    /*Получение Offer по id*/
-    .addCase(fetchOfferById .pending, (state) => {
-      state.status = RequestStatus.Loading;
-    })
+  // /*Получение Offer по id*/
+  // .addCase(fetchOfferById .pending, (state) => {
+  //   state.status = RequestStatus.Loading;
+  // })
 
-    .addCase(fetchOfferById.fulfilled, (state, action) => {
-      state.status = RequestStatus.Success;
-      state.offer = action.payload;
-    })
+  // .addCase(fetchOfferById.fulfilled, (state, action) => {
+  //   state.status = RequestStatus.Success;
+  //   state.offer = action.payload;
+  // })
 
-    .addCase(fetchOfferById .rejected, (state) => {
-      state.status = RequestStatus.Failed;
-      state.offer = null;
-    })
+  // .addCase(fetchOfferById .rejected, (state) => {
+  //   state.status = RequestStatus.Failed;
+  //   state.offer = null;
+  // })
 
-    /*Получение Offers по близости выбранного Offer по id*/
-    .addCase(fetchNearbyOffersAction.fulfilled, (state, action) => {
-      state.nearbyOffers = action.payload; // сохраняем предложения рядом
-    })
-    .addCase(fetchNearbyOffersAction.rejected, (state) => {
-      state.nearbyOffers = []; // при ошибке - пустой массив
-    })
+  // /*Получение Offers по близости выбранного Offer по id*/
+  // .addCase(fetchNearbyOffersAction.fulfilled, (state, action) => {
+  //   state.nearbyOffers = action.payload; // сохраняем предложения рядом
+  // })
+  // .addCase(fetchNearbyOffersAction.rejected, (state) => {
+  //   state.nearbyOffers = []; // при ошибке - пустой массив
+  // })
 
-    /*Получение комментариев*/
-    .addCase(fetchCommentsAction.fulfilled, (state, action) => {
-      state.comments = action.payload;
-    })
+  // /*Получение комментариев*/
+  // .addCase(fetchCommentsAction.fulfilled, (state, action) => {
+  //   state.comments = action.payload;
+  // })
 
     .addCase(fetchCommentsAction.rejected, (state) => {
       state.comments = []; // при ошибке - пустой массив
@@ -129,10 +129,10 @@ export const reducer = createReducer(initialState, (builder) => {
       state.authStatus = AuthorizationStatus.NoAuth;
     })
 
-    /*Статус авторизации*/
-    .addCase(requireAuthorization, (state, action) => {
-      state.authStatus = action.payload;
-    })
+  // /*Статус авторизации*/
+  // .addCase(requireAuthorization, (state, action) => {
+  //   state.authStatus = action.payload;
+  // })
 
     .addCase(fetchFavoritesAction.fulfilled, (state, action) => {
       state.favorites = action.payload;
