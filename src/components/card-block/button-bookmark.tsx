@@ -7,6 +7,7 @@ import { useAppSelector } from '../../hooks/useStore.ts';
 import { AppRoute, AuthorizationStatus } from '../../const.ts';
 import { fetchFavoritesAction } from '../../store/async-actions/favorite-action.ts';
 import { memo, useState } from 'react';
+import { selectAuthorizationStatus } from '../../store/selectors/base-selectors.ts';
 interface ButtonBookmarkProps {
   id: string;
   isFavorite?: boolean;
@@ -18,7 +19,7 @@ function ButtonBookmark ({ id, isFavorite = false, variant}:ButtonBookmarkProps)
   const [isPending, setIsPending] = useState(false);
   const { name, width, height } = STYLES[variant];
 
-  const authStatus = useAppSelector((state) => state.authStatus);
+  const authStatus = useAppSelector(selectAuthorizationStatus);
   const isAuthorized = authStatus === AuthorizationStatus.Auth;
 
   const dispatch = useAppDispatch();

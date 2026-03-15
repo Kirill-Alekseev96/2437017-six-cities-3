@@ -1,8 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { CommentData } from '../../types/comment-data';
 import { Offer } from '../../types/offer-data';
-import { fetchCommentsAction, fetchNearbyOffersAction, fetchOfferById } from '../async-actions/offer-action';
+import { commentAction, fetchCommentsAction, fetchNearbyOffersAction, fetchOfferById } from '../async-actions/offer-action';
 import { RequestStatus } from '../../const';
+import { favoriteAction } from '../async-actions/favorite-action';
+import { logoutAction } from '../async-actions/login-action';
 
 type OfferState = {
   offer: Offer | null;
@@ -52,6 +54,37 @@ const offerSlice = createSlice({
       /*Получение комментариев*/
       .addCase(fetchCommentsAction.fulfilled, (state, action) => {
         state.comments = action.payload;
+      })
+
+      .addCase(fetchCommentsAction.rejected, (state) => {
+        state.comments = []; // при ошибке - пустой массив
+      })
+
+      /*Добавление новых комментариев*/
+      .addCase(commentAction.fulfilled, (state, action) => {
+        state.comments = [action.payload, ...state.comments];
+      })
+
+      /*Изменение статуса (добавить/удалить)*/
+      .addCase(favoriteAction.fulfilled, (state, action) => {
+        const updatedOffer = action.payload;
+
+        if (state.offer?.id === updatedOffer.id) {
+          state.offer = updatedOffer;
+        }
+      })
+
+      /*Выход из акаунта*/
+      .addCase(logoutAction.fulfilled, (state) => {
+
+        if (state.offer) {
+          state.offer.isFavorite = false;
+        }
+
+        state.nearbyOffers = state.nearbyOffers.map((offer) => ({
+          ...offer,
+          isFavorite: false
+        }));
       });
   }
 });

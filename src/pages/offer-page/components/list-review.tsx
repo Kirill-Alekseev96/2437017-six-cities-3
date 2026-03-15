@@ -1,10 +1,11 @@
 import { COMMENT } from '../../../const.ts';
 import { useAppSelector } from '../../../hooks/useStore.ts';
+import { selectComments } from '../../../store/selectors/base-selectors.ts';
 import { CommentData } from '../../../types/comment-data.ts';
 
 export default function ListReview () {
 
-  const comments = useAppSelector((state) => state.comments);
+  const comments = useAppSelector(selectComments);
 
   // Функция для форматирования даты
   const formatReviewDate = (dateString: string) => {

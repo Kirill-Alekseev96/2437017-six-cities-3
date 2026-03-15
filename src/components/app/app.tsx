@@ -15,11 +15,12 @@ import { checkAuthAction } from '../../store/async-actions/authorization-action.
 import { fetchFavoritesAction } from '../../store/async-actions/favorite-action.ts';
 
 import { useAppSelector, useAppDispatch } from '../../hooks/useStore.ts';
+import { selectAuthorizationStatus } from '../../store/selectors/base-selectors.ts';
 
 
 export default function App() {
 
-  const authorizationStatus = useAppSelector((state) => state.authStatus);
+  const authorizationStatus = useAppSelector(selectAuthorizationStatus);
 
   const dispatch = useAppDispatch();
   useEffect(() => {

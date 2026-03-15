@@ -4,10 +4,11 @@ import HeaderBlock from './header-block.tsx';
 import FooterBlock from './footer-block.tsx';
 import { AppRoute } from '../../const.ts';
 import { useAppSelector } from '../../hooks/useStore.ts';
+import { selectFavorites } from '../../store/selectors/base-selectors.ts';
 
 export default function Layout (): JSX.Element {
   const location = useLocation();
-  const favorites = useAppSelector((state) => state.favorites);
+  const favorites = useAppSelector(selectFavorites);
 
   const isMainPage = location.pathname === AppRoute.Main.toString();
   const isOfferPage = location.pathname.startsWith(AppRoute.Offer); // Динамический путь

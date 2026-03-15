@@ -2,6 +2,8 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Offer } from '../../types/offer-data';
 import { fetchAllOffers } from '../async-actions/offers-action';
 import { RequestStatus } from '../../const';
+import { favoriteAction } from '../async-actions/favorite-action';
+import { logoutAction } from '../async-actions/login-action';
 
 type OffersState = {
   offers: Offer[];
@@ -38,6 +40,22 @@ const offersSlice = createSlice({
 
       .addCase(fetchAllOffers.rejected, (state) => {
         state.status = RequestStatus.Failed;
+      })
+
+      /*Изменение статуса (добавить/удалить)*/
+      .addCase(favoriteAction.fulfilled, (state, action) => {
+        const updatedOffer = action.payload;
+        state.offers = state.offers.map((offer) =>
+          offer.id === updatedOffer.id ? updatedOffer : offer
+        );
+      })
+
+      /*Выход из акаунта*/
+      .addCase(logoutAction.fulfilled, (state) => {
+        state.offers = state.offers.map((offer) => ({
+          ...offer,
+          isFavorite: false,
+        }));
       });
   }
 });

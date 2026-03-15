@@ -3,6 +3,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/useStore';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import { logoutAction } from '../../store/async-actions/login-action';
 import { useCallback } from 'react';
+import { selectAuthorizationStatus, selectFavorites, selectUser } from '../../store/selectors/base-selectors';
 
 interface HeaderProps {
   showAuthInfo: boolean;
@@ -10,11 +11,11 @@ interface HeaderProps {
 
 export default function HeaderBlock ({showAuthInfo} :HeaderProps): JSX.Element {
 
-  const favorites = useAppSelector((state) => state.favorites);
-  const authStatus = useAppSelector((state) => state.authStatus);
+  const favorites = useAppSelector(selectFavorites);
+  const userData = useAppSelector(selectUser);
+  const authStatus = useAppSelector(selectAuthorizationStatus);
   const isAuthorized = authStatus === AuthorizationStatus.Auth;
 
-  const userData = useAppSelector((state) => state.userData);
   const dispatch = useAppDispatch();
 
   const handleLogout = useCallback(() => {

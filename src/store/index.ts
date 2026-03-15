@@ -3,6 +3,8 @@ import { createAPI } from '../services/api';
 import offersSlice from './slice/offers-slice';
 import offerSlice from './slice/offer-slice';
 import authSlice from './slice/auth-slice';
+import favoriteSlice from './slice/favorites-slice';
+import errorSlice from './slice/error-slice';
 
 
 const api = createAPI();
@@ -12,6 +14,8 @@ export const store = configureStore({
     offers: offersSlice,
     offer: offerSlice,
     authStatus: authSlice,
+    favorite: favoriteSlice,
+    error: errorSlice,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
