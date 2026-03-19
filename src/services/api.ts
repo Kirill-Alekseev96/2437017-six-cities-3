@@ -34,6 +34,7 @@ export const createAPI = ():AxiosInstance => {
     return config;
   });
 
+  // Перехватчик ответов: обрабатываем ошибки
   api.interceptors.response.use(
     (response) => response,
     (error: AxiosError<{message: string}>) => {

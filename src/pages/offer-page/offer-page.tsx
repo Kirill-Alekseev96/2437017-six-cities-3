@@ -31,7 +31,7 @@ export default function OfferPage (): JSX.Element {
       dispatch(fetchNearbyOffersAction(id));
       dispatch(fetchCommentsAction(id))
         .unwrap()
-        .catch(() => navigate(AppRoute.notFound));
+        .catch(() => navigate(AppRoute.notFound)); // при ошибке перенаправляешь на страницу 404
     }
   }, [dispatch, id, navigate]);
 

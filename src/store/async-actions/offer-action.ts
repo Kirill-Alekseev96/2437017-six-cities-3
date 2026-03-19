@@ -14,7 +14,7 @@ export const fetchOfferById = createAsyncThunk<Offer, string,{
 }>
 
 ('offer/fetchById',
-  async(offerId, {extra:api}) => {
+  async(offerId, {extra:api}) => { // <- id приходит сюда dispatch(fetchOfferById(id)
     const response = await api.get<Offer>(`${APIRoute.Offers}/${offerId}`);
     return response.data;
   }

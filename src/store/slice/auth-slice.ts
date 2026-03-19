@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { AuthorizationStatus } from '../../const';
-import { requireAuthorization } from '../action';
 import { loginAction, logoutAction } from '../async-actions/login-action';
 import { UserData } from '../../types/user-data';
 import { checkAuthAction } from '../async-actions/authorization-action';
@@ -22,10 +21,6 @@ const authSlice = createSlice({
 
   extraReducers: (builder) => { //для "чужих" действий(асинхронных)
     builder
-    /*Статус авторизации*/
-      .addCase(requireAuthorization, (state, action) => {
-        state.authStatus = action.payload;
-      })
 
       .addCase(checkAuthAction.fulfilled, (state, action) => {
         state.userData = action.payload;
@@ -44,6 +39,12 @@ const authSlice = createSlice({
       })
 
       .addCase(loginAction.rejected, (state) => {
+        state.userData = null;
+        state.authStatus = AuthorizationStatus.NoAuth;
+      })
+
+      /*Выход в акаунт*/
+      .addCase(logoutAction.fulfilled, (state) => {
         state.userData = null;
         state.authStatus = AuthorizationStatus.NoAuth;
       })
