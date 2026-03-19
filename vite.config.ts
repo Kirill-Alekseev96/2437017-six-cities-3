@@ -13,6 +13,7 @@ export default defineConfig({
     setupFiles: ['./src/setupTests.ts'],
   },
   build: {
+    sourcemap: true, // для отладки ошибок
     outDir: 'docs',
   },
   base: './',
