@@ -1,7 +1,7 @@
 import leaflet from 'leaflet';
 
-const URL_MARKER_CURRENT = '/public/img/pin-active.svg';
-const URL_MARKER_DEFAULT = '/public/img/pin.svg';
+const URL_MARKER_CURRENT = './img/pin-active.svg';
+const URL_MARKER_DEFAULT = './img/pin.svg';
 
 const defaultMarkerIcon = leaflet.icon({
   iconUrl: URL_MARKER_DEFAULT,

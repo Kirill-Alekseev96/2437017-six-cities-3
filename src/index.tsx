@@ -6,6 +6,7 @@ import { store } from './store/index.ts';
 import App from './components/app/app.tsx';
 import ErrorMessage from './components/error-message/error-message.tsx';
 import { checkAuthAction } from './store/async-actions/authorization-action.ts';
+import { BrowserRouter } from 'react-router-dom'; //Все пути начинай отсюда
 
 store.dispatch(checkAuthAction());
 
@@ -16,8 +17,10 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store = {store}>
-      <ErrorMessage/>
-      <App/>
+      <BrowserRouter basename="/2437017-six-cities-3">
+        <ErrorMessage />
+        <App />
+      </BrowserRouter>
     </Provider>
   </React.StrictMode>
 );
