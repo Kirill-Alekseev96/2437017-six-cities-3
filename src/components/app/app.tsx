@@ -37,7 +37,7 @@ export default function App() {
 
   return (
     <HelmetProvider>
-      <BrowserRouter>
+      <BrowserRouter basename="/2437017-six-cities-3">
         <Routes>
           <Route path="/" element={<Layout/>}>
             <Route index element = { < MainPage /> }/>
