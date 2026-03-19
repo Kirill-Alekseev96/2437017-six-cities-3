@@ -24,3 +24,6 @@ root.render(
     </Provider>
   </React.StrictMode>
 );
+
+
+// из-за BrowserRouter сервер не работает.
