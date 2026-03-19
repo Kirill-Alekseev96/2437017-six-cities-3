@@ -10,10 +10,13 @@ export default function Layout (): JSX.Element {
   const location = useLocation();
   const favorites = useAppSelector(selectFavorites);
 
-  const isMainPage = location.pathname === AppRoute.Main.toString();
-  const isOfferPage = location.pathname.startsWith(AppRoute.Offer); // Динамический путь
-  const isLoginPage = location.pathname === AppRoute.Login.toString(); // Точный путь
-  const isFavoritePage = location.pathname === AppRoute.Favorites.toString(); // Точный путь
+  // Убираем basename для сравнения
+  const pathname = location.pathname.replace('/2437017-six-cities-3', '');
+
+  const isMainPage = pathname === AppRoute.Main.toString();
+  const isOfferPage = pathname.startsWith(AppRoute.Offer); // Динамический путь
+  const isLoginPage = pathname === AppRoute.Login.toString(); // Точный путь
+  const isFavoritePage = pathname === AppRoute.Favorites.toString(); // Точный путь
   const showFooter = isOfferPage || isFavoritePage;
   const showAuthInfo = !isLoginPage;
 
