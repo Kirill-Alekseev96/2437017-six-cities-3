@@ -12,4 +12,7 @@ export default defineConfig({
     environment: 'jsdom',
     setupFiles: ['./src/setupTests.ts'],
   },
+  build: {
+    outDir: 'docs', // <- ВОТ ЭТУ СТРОКУ ДОБАВЬ!
+  },
 });
